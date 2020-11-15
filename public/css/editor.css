@@ -1,0 +1,142 @@
+html, body {
+height: 100%;
+}
+body {
+background-image: url('');
+}
+#main_article {
+  width: 1124px;
+  margin: 0 auto 0;
+  overflow: hidden;
+  padding: 30px;
+}
+#article-info {
+  margin: 50px auto 35px;
+  display : block;
+  width: 1024px;
+  text-align: center;
+}
+#article-desc {
+  color: grey;
+}
+#author-info {
+  display: inline-block;
+  position: fixed;
+  width: 130px;
+  border: 1px solid;
+  border-radius: 10px;
+  left: 30px;
+  top: 80px;
+}
+img {
+  max-width:100%;
+}
+#follow:hover {
+  color: white;
+  background-image: linear-gradient(to bottom right, #19d3da, #b8de6f);
+}
+#follow {
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  margin: auto auto 10px 10px;
+  transition: 0.3s;
+}
+#like {
+  height: 80px;
+  width: 80px;
+  border: 1px solid;
+  border-radius:40px;
+  background-color:white;
+  transition: 0.25s;
+  display: block;
+  margin: 15px;
+}
+#like:hover {
+  background-color: blue;
+  color: white;
+}
+#comment-button {
+  height: 80px;
+  width: 80px;
+  border: 1px solid;
+  border-radius:40px;
+  background-color:white;
+  transition: 0.25s;
+  display: block;
+  margin: 15px;
+}
+#comment-button:hover {
+  background-color: yellow;
+  color: white;
+}
+#like-comment{
+  display: inline-block;
+  position: fixed;
+  right: 30px;
+  top: 80px;
+}
+#comment-section {
+  width: 1024px;
+  margin: 20px auto 0;
+  border: 1px solid;
+  border-radius:15px;
+  padding:20px;
+}
+#comment {
+  margin-left: 20px;
+  border-left: 1px solid ;
+  border-top : 0px;
+  border-right : 0px;
+  border-bottom : 0px;
+  border-color: grey;
+  padding:10px
+}
+
+#comment-rule {
+  background-image: linear-gradient(to right, #9088d4, #eeeded);
+  height:1px;
+}
+
+#comment-form{
+  width: 1024px;
+  margin: 20px auto 0;
+  padding:20px;
+}
+
+.loader {
+  border: 4px solid #000000; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#flag {
+  height: 80px;
+  width: 80px;
+  border: 1px solid;
+  border-radius:40px;
+  background-color:white;
+  transition: 0.25s;
+  display: block;
+  margin: 15px;
+}
+
+#flag:hover {
+  background-color: red;
+  color: white;
+}

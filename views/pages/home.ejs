@@ -1,0 +1,40 @@
+<%- include("header") %>
+
+<section class="section-spacing bottom-none inverse-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-title text-center">
+          <h2><span>Readmore</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <ul id="filter-list">
+          <li class="filter active" data-filter="all">ALL</li>
+          <li class="filter" data-filter="1">TECHNOLOGY</li>
+          <li class="filter" data-filter="2">ART</li>
+          <li class="filter" data-filter="3">MYSTERY</li>
+          <li class="filter" data-filter="4">FICTION</li>
+          <li class="filter" data-filter="5">SUSPENSE</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="gallery-outer">
+    <ul class="gallery-items" id="article-holder" style="padding:0px; position: relative;height: 1261px;">
+    </ul>
+  </div>
+</section>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/filterizr/2.2.4/jquery.filterizr.min.js"></script>
+<script src="gallery_animation.js"></script>
+<!-- Boootstrap js start  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Boootstrap js   -->
+<script src="load-gallery-articles.js" charset="utf-8"></script>
+</body>
+</html>
