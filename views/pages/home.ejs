@@ -1,40 +1,131 @@
-<%- include("header") %>
+<!DOCTYPE html>
+<html lang="en">
 
-<section class="section-spacing bottom-none inverse-bg">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="section-title text-center">
-          <h2><span>Readmore</span></h2>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%- include ('../partials/head.ejs') %>
+  <link href="/static/css/bootstrap-side.min.css" rel="stylesheet">
+  <link href="/static/css/simple-sidebar.css" rel="stylesheet">
+  <title>Home Page</title>
+	<link rel="stylesheet" type="text/css" href="static/css/styl.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-dark text-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Menu </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Dashboard</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Events</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Status</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <button style="width: 32px; height: 32px; background-image: url(static/navbar/navbar-32.png);" id="menu-toggle"></button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
         </div>
+      </nav>
+
+      <div class="container-fluid">
+        
+        <section class="section-spacing bottom-none inverse-bg">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-title text-center">
+                  <h2><span>Readmore</span></h2>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <ul id="filter-list">
+                  <li class="filter active" data-filter="all">ALL</li>
+                  <li class="filter" data-filter="1">TECHNOLOGY</li>
+                  <li class="filter" data-filter="2">ART</li>
+                  <li class="filter" data-filter="3">MYSTERY</li>
+                  <li class="filter" data-filter="4">FICTION</li>
+                  <li class="filter" data-filter="5">SUSPENSE</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-outer">
+            <ul class="gallery-items" id="article-holder" style="padding:0px; position: relative;height: 1261px;">
+            </ul>
+          </div>
+        </section>
+
       </div>
+
     </div>
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <ul id="filter-list">
-          <li class="filter active" data-filter="all">ALL</li>
-          <li class="filter" data-filter="1">TECHNOLOGY</li>
-          <li class="filter" data-filter="2">ART</li>
-          <li class="filter" data-filter="3">MYSTERY</li>
-          <li class="filter" data-filter="4">FICTION</li>
-          <li class="filter" data-filter="5">SUSPENSE</li>
-        </ul>
-      </div>
-    </div>
+    <!-- /#page-content-wrapper -->
+
   </div>
-  <div class="gallery-outer">
-    <ul class="gallery-items" id="article-holder" style="padding:0px; position: relative;height: 1261px;">
-    </ul>
-  </div>
-</section>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/filterizr/2.2.4/jquery.filterizr.min.js"></script>
-<script src="gallery_animation.js"></script>
-<!-- Boootstrap js start  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!-- Boootstrap js   -->
-<script src="load-gallery-articles.js" charset="utf-8"></script>
+  <!-- /#wrapper -->
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/filterizr/2.2.4/jquery.filterizr.min.js"></script>
+  <script src="static/js/gallery_animation.js"></script>
+  <!-- Boootstrap js start  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- Boootstrap js   -->
+  <script src="static/js/load-gallery-articles.js" charset="utf-8"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/js/jquery/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
 </body>
+
 </html>

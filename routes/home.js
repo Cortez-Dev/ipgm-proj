@@ -7,7 +7,7 @@ express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
 router.get('/', ensureAuth,function (req, res) {
-    res.send('Home');
+    res.render('pages/home');
 });
 router.get('/someRoute', function (req, res) {
     res.send('Hello SomeRoute!');
