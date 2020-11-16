@@ -5,6 +5,8 @@ const Comment = require('./Comment');
 const Article = new Schema({
 	author_id: {type: Schema.Types.ObjectId, ref:'User'},
     collabs: [{type: Schema.Types.ObjectId, ref:'User'}],
+    title: {type: String, trim: true, default: "Title"},
+    desc: {type: String, trim: true, default: "Description"},
     path: {type: String, trim: true, default: ""},
     genres: {type: Array, default: []},
     viewcount: {type: Number, default: 0},

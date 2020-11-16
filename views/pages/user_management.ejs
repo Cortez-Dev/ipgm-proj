@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
   <title>Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
   <link href="/static/css/bootstrap-theme.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/static/css/style3.css" />
-  <link rel="stylesheet" type="text/css" href="/static/css/animate-custom.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/style3.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/animate-custom.css">
   <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Parisienne&display=swap" rel="stylesheet">
-  <%- include ('../partials/head.ejs') %> 
-  <!-- <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script> -->
-
+  <%- include ('../partials/head.ejs') %>
 </head>
 
 <body>
   <section>
-    <div id="container_demo">
+    <div id="container">
       <a class="hiddenanchor" id="toregister"></a>
       <a class="hiddenanchor" id="tologin"></a>
       <div id="wrapper">
-
         <div id="login" class="animate form">
           <form action="/users/login" autocomplete="on" method="post">
             <h1>Log in</h1>
             <p>
-              <label for="user" class="user" data-icon="u"> Your email</label>
+              <label for="user" class="user"> Your email</label>
               <input id="username_field" name="username" required="required" type="email" placeholder="mymail@mail.com" />
             </p>
             <p>
-              <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+              <label for="password" class="youpasswd"> Your password </label>
               <input id="password_field" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
             </p>
             <p class="keeplogin">
@@ -44,7 +40,7 @@
             </p>
             <p class="change_link">
               Not a member yet ?
-              <a href="#toregister" class="to_register">Join us</a>
+              <a href="#toregister"  class="Canchor">Join us</a>
             </p>
           </form>
         </div>
@@ -53,27 +49,27 @@
           <form action="/users/register" autocomplete="on" method="post">
             <h1> Sign up </h1>
             <p>
-              <label for="emailsignup" class="youmail" data-icon="e">Your email</label>
+              <label for="emailsignup" class="youmail">Your email</label>
               <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com" />
             </p>
             <p>
-              <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+              <label for="passwordsignup" class="youpasswd">Your password </label>
               <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
             </p>
             <p>
-              <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+              <label for="passwordsignup_confirm" class="youpasswd">Please confirm your password </label>
               <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
             </p>
             <p>
-              <label for="firstNamesignup" class="firstName" data-icon="e">First Name</label>
+              <label for="firstNamesignup" class="firstName">First Name</label>
               <input id="firstNamesignup" name="firstName" required="required" type="text" placeholder="eg. John" />
             </p>
             <p>
-              <label for="lastNamesignup" class="lastName" data-icon="e">Last Name</label>
+              <label for="lastNamesignup" class="lastName">Last Name</label>
               <input id="lastNamesignup" name="lastName" required="required" type="text" placeholder="eg. Doe" />
             </p>
             <p>
-              <label for="agesignup" class="agetName" data-icon="e">Age</label>
+              <label for="agesignup" class="agetName">Age</label>
               <input id="agesignup" name="age" required="required" type="number" min="13" placeholder="eg. 21" />
             </p>
             <p class="signin button">
@@ -81,16 +77,18 @@
             </p>
             <p class="change_link">
               Already a member ?
-              <a href="#tologin" class="to_register"> Log in </a>
-
+              <a href="#tologin" class="Canchor"> Log in </a>
             </p>
           </form>
         </div>
-
       </div>
     </div>
   </section>
-  </div>
+  <script type="text/javascript">
+    $('.to_register').click(function(event){
+        event.preventDefault();
+    });
+  </script>
 </body>
 
 </html>

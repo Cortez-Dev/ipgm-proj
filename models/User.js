@@ -6,7 +6,8 @@ const Subscription = require('./Subscription');
 
 const User = new Schema({
 	email: {type: String, trim: true, required: true},
-    password_hash: {type:String, trim: true, required: true}
+    password_hash: {type:String, trim: true, required: true},
+    role: {type: String, enum: ['user', 'admin'], default: 'user'}
 });
 
 User.pre('remove', function(next) {

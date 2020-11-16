@@ -45,13 +45,13 @@ a.hiddenanchor{
 	font-size: 48px;
 	color: rgb(6, 106, 117);
 	padding: 2px 0 10px 0;
-	font-family: 'FranchiseRegular','Arial Narrow',Arial,sans-serif;
+	font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 	font-weight: bold;
 	text-align: center;
 	padding-bottom: 30px;
 }
 body{
-	font-family: 'Merriweather', serif;
+	font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   	background: url("/static/imgs/bg-masthead.jpg") no-repeat center center fixed;-webkit-background-size: cover; !important
 
     -moz-background-size: cover;
@@ -234,35 +234,6 @@ p.change_link{
 	-webkit-border-radius: 0 0  5px 5px;
 	   -moz-border-radius: 0 0  5px 5px;
 	        border-radius: 0 0  5px 5px;
-	background: rgb(225, 234, 235);
-	background: -moz-repeating-linear-gradient(-45deg,
-	rgb(247, 247, 247) ,
-	rgb(247, 247, 247) 15px,
-	rgb(225, 234, 235) 15px,
-	rgb(225, 234, 235) 30px,
-	rgb(247, 247, 247) 30px
-	);
-	background: -webkit-repeating-linear-gradient(-45deg,
-	rgb(247, 247, 247) ,
-	rgb(247, 247, 247) 15px,
-	rgb(225, 234, 235) 15px,
-	rgb(225, 234, 235) 30px,
-	rgb(247, 247, 247) 30px
-	);
-	background: -o-repeating-linear-gradient(-45deg,
-	rgb(247, 247, 247) ,
-	rgb(247, 247, 247) 15px,
-	rgb(225, 234, 235) 15px,
-	rgb(225, 234, 235) 30px,
-	rgb(247, 247, 247) 30px
-	);
-	background: repeating-linear-gradient(-45deg,
-	rgb(247, 247, 247) ,
-	rgb(247, 247, 247) 15px,
-	rgb(225, 234, 235) 15px,
-	rgb(225, 234, 235) 30px,
-	rgb(247, 247, 247) 30px
-	);
 }
 #wrapper p.change_link a {
 	display: inline-block;
