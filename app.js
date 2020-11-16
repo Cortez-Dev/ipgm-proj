@@ -39,6 +39,12 @@ app.use(session({
   store: new MongoStore({mongooseConnection: mongoose.connection}),
 }))
 
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -56,6 +62,19 @@ app.use('/', require('./routes/welcome'));
 app.use('/home', require('./routes/home'));
 app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
+
+app.use(function(req, res){
+  res.type('text/html');
+  res.status(404);
+  res.render('pages/404');
+});
+
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.status(500);
+  res.render('pages/500');
+});
+
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, function () {

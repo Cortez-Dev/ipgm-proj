@@ -6,7 +6,7 @@ express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
 router.get('/', function (req, res) {
-    res.send('Admin');
+    res.render('pages/admin_login');
 });
 router.get('/someRoute', function (req, res) {
     res.send('Hello SomeRoute!');

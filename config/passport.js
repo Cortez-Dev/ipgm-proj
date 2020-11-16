@@ -1,17 +1,17 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/user');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 module.exports = function(passport){
-  passport.use(new LocalStrategy(function(email, password, done){
-    let query = {email: email};
+  passport.use(new LocalStrategy(function(username, password, done){
+    let query = {email: username};
     User.findOne(query, function(err, user){
       if(err) throw err;
       if(!user){
         return done(null, false, {message: 'Oops! Email is not registered...'});
       }
 
-      bcrypt.compare(password, user.password, function(err, isMatch){
+      bcrypt.compare(password, user.password_hash, function(err, isMatch){
         if(err) throw err;
         if(isMatch){
           return done(null, user);
