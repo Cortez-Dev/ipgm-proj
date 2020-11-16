@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<title>Filter Gallery</title>
-	<!--bootstrap-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Editor</title>
+  <!-- Bootstrap core CSS -->
+  <link href="/static/css/bootstrap-side.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/static/css/simple-sidebar.css" rel="stylesheet">
+  <!--bootstrap-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<!--font-->
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -11,169 +16,139 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
-	<!-- Icons -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="/css/article.css">
+  <%- include ('../partials/head.ejs') %> 
+
 </head>
 
 <body>
-	<!-- Navbar Start -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">IPGM</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Readmore</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Profile
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Username</a>
-						<a class="dropdown-item" href="#">member status</a>
-						<a class="dropdown-item" href="#">Subscribe</a>
-						<hr />
-						<a class="dropdown-item" href="/">Logout</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<!-- Navbar End -->
-	<div id="author-info">
-		<h4 style="padding : 10px"><strong>firstName lastName</strong></h4>
-		<hr style="width: 100px;margin-top: 0px;margin-bottom: 5px;background-image: linear-gradient(to right, #52057b, #ea2c62); height:1px;">
-		<button id="follow">Follow</button>
-	</div>
 
-	<div id="like-comment">
-		<button id="like" onClick="like();"><i class="md-48 material-icons">thumb_up</i></button>
-		<a href="#comment-section"><button id="comment-button"><i class="material-icons edit-icon">comment</i></button></button></a>
-		<button id="flag" onClick="flag();"><i class="md-48 material-icons">flag</i></button>
-	</div>
+  <div class="d-flex" id="wrapper">
 
-	<div class="content">
-		<span id="article-info">
-			<h1 id="article-title">Welcome to this project.</h1>
-			<p id="article-desc"> This is some description about the article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some description </p>
-		</span>
-		<div id="main_article">
-			<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Tree image">
-			about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more textThis is some description about the
-			article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the
-			article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more text
-		</div>
-	</div>
-	<hr style="width: 1224px;margin-top: 10px;margin-bottom: 5px;background-image: linear-gradient(to right, #dd4747, #ffbf00); height:3px;">
-	<div id="comment-section">
-		<div id="comment-block">
-			<h5>Commenter Name</h5>
-			<p id="comment">.Some more textThis is some description about the article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some de</p>
-			<hr id="comment-rule">
-		</div>
-		<div id="comment-block">
-			<h5>Commenter Name</h5>
-			<p id="comment">.Some more textThis is some description ption about the article.This is dummy article.Some more texthis is some de</p>
-			<hr id="comment-rule">
-		</div>
-		<div id="comment-block">
-			<h5>Commenter Name</h5>
-			<p id="comment">.Some more textThis is some description about the article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
-				article.Some more texthis is some de</p>
-			<hr id="comment-rule">
-		</div>
-	</div>
-	<div id="comment-form">
-		<!-- Comment -->
-		<div class="form-group">
-			<label for="replyFormComment">Your comment</label>
-			<textarea class="form-control" id="FormComment" rows="5"></textarea>
-		</div>
+    <!-- Sidebar -->
+    <div class="bg-dark text-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading text-light">Menu </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Dashboard</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Events</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action text-light bg-dark">Status</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
-		<div class="text-center mt-4">
-			<button class="btn btn-info btn-md" onclick="addComment();">Post</button>
-			<div class="loader"></div>
-		</div>
-	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
-	<script type="text/javascript">
-	$('.loader').toggle();
-		function like() {
-			var response = $.post("/like/3", function(data) {
-				console.log(data);
-			});
-		}
-		var toxicity_flag = true;
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
 
-		function addComment() {
-			$('.loader').toggle();
-			var text = $('#FormComment').val();
-			const threshold = 0.7;
-			toxicity.load(threshold).then(model => {
-				const sentences = [text];
-				model.classify(sentences).then(predictions => {
-					for (i = 0; i < 7; i++) {
-						var prob = predictions[i].results[0].probabilities[1];
-						if (prob > threshold) {
-							alert(predictions[i].label + " was found please remove it!");
-							toxicity_flag = false;
-						}
-					}
-					$('.loader').toggle();
-					if (toxicity_flag) {
-						var name = 'meet shah';
-						var comment_string = '<div id="comment-block"><h5>' + name + '</h5><p id = "comment">' + text + '</p><hr id = "comment-rule"></div>';
-						$('#comment-section').append(comment_string);
-						// SEND POST REQUEST HERE
-					}
-					$('#FormComment').val('');
-					toxicity_flag = true;
-				})
-			});
-		}
-	</script>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/logout">Log Out</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/editor/new">New Article</a>
+              </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container p-2">
+        
+        <form class="form" action="/editor/new/save" method="post">
+          <textarea id="editor" name="editor"></textarea>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Title</label>
+              <input type="text" class="form-control" name="title" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" name="desc" rows="3" required maxlength="400"></textarea>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputState">Genre</label>
+                <select class="form-control" name="genre" required>
+                    <option selected="">Choose...</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Art">Art</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Political">Political</option>
+                    <option value="Comedy">Comedy</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="inputState">Status</label>
+              <select class="form-control" name="status" required>
+                  <option selected="">Choose...</option>
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+              </select>
+            </div>
+        </div>
+          <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" name="termcheck" required>
+                <label class="form-check-label" for="gridCheck">
+                    <a href="#">Please Read Terms and Conditions before procedding
+                    </a>
+                </label>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <!-- <button type="button" name="button" onclick="down();"></button> -->
+
+      </div>
+    </div>
+
+
+  </div>
+  <script src="/static/js/jquery/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+  <script src="/static/ckeditor/ckeditor.js"></script>        
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+  CKEDITOR.replace('editor');
+  CKEDITOR.config.width = 1124;
+  CKEDITOR.config.height = 1000;
+  CKEDITOR.env.isCompatible = true;
+  CKEDITOR.addCss('.cke_editable img { max-width: 100% !important; height: auto !important; }');
+  </script>
 </body>
-
 </html>

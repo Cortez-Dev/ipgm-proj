@@ -62,6 +62,7 @@ app.use('/', require('./routes/welcome'));
 app.use('/home', require('./routes/home'));
 app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
+app.use('/editor', require('./routes/editor'));
 
 app.use(function(req, res){
   res.type('text/html');

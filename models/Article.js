@@ -8,7 +8,7 @@ const Article = new Schema({
     title: {type: String, trim: true, default: "Title"},
     desc: {type: String, trim: true, default: "Description"},
     path: {type: String, trim: true, default: ""},
-    genres: {type: Array, default: []},
+    genres: {type: String, trim: true},
     viewcount: {type: Number, default: 0},
     likes: {type: Number, default: 0},
     dislikes: {type: Number, default: 0},
