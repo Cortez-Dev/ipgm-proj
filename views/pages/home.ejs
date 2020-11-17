@@ -28,87 +28,40 @@
             </div>
         </nav>
         <!-- Main -->
-        <!-- <section class="about-section-1 text-center" id="public-articles">
-            <div class="container">
+        <section class="about-section-1 text-center min-vh-100" id="public-articles">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-white mb-4">Public Articles</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <ul id="filter-list">
-						<li class="filter active" data-filter="all">All</li>
-						<li class="filter" data-filter="Action">Action</li>
-						<li class="filter" data-filter="Adventure">Adventure</li>
-						<li class="filter" data-filter="Politics">Politics</li>
-						<li class="filter" data-filter="Comedy">Comedy</li>
-                        <li class="filter" data-filter="Tragedy">Tragedy</li>
-                        <li class="filter" data-filter="Tech">Tech</li>
-					</ul>
-                </div>
-                <div class="row">
-                    <% articles.forEach(element => { %>
-                      <div class="col-lg-4 col-md-6 col-sm-6 p-2" data-category="<%= element.genres %> ">
-                          <div class="card">
-                              <div class="card-body">
-                                  <h5 class="card-title"><a href="/article/5fb352bb0bc1456f40de07f4"><%= element.title %> </a></h5>
-                                  <p class="card-text"><%= element.desc %></p>
-                                  <a href="#"><%= element.genres %></a>
-                              </div>
-                          </div>
-                      </div>
-                    <% }) %>
-                </div>
-            </div>
-        </section> -->
-        <section class="section-spacing bottom-none inverse-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title text-center">
-                            <h2><span>Gallery</span></h2>
-                        </div>
-                    </div>
-                </div>
-    
-    
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul id="filter-list">
-                            <li class="filter active" data-filter="all">AllL</li>
-                            <li class="filter" data-filter="Comedy">Comedy</li>
-                            <li class="filter" data-filter="Tragedy">Tragedy</li>
-                            <li class="filter" data-filter="Tech">Tech</li>
-                            <li class="filter" data-filter="Mystery">Mystery</li>
-                            <li class="filter" data-filter="Political">Political</li>
+                    <div class="col-lg-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Morbi leo risus</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
                         </ul>
                     </div>
+                    <div class="col-lg-9">
+                        <div class="row m-0">
+                        <% articles.forEach(element => { %>
+                        <div class="col-lg-4 col-md-6 col-sm-6 p-2 m-0" data-category="<%= element.genres %> ">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title"><a href="/article/5fb352bb0bc1456f40de07f4"><%= element.title %> </a></h5>
+                                      <p class="card-text"><%= element.desc %></p>
+                                      <a href="#"><%= element.genres %></a>
+                                  </div>
+                              </div>
+                        </div>
+                        <% }) %>
+                        </div>
+                    </div>
                 </div>
             </div>
-    
-    
-            <div class="gallery-outer">
-                <ul class="gallery-items" style="padding:0px; position: relative;
-                 height: 1261px;">
-                    <% articles.forEach(element => { %>
-                        <li class="filtr-item p-2" data-category="<%= element.genres %> " style="opacity: 1; transform: scale(1) translate3d(0px,0px,0px);backface-visibility: hidden;
-                     perspective: 1000px; transform-style: preserve-3d; position: absolute;
-                     transition: all 0.5s ease-in-out 0ms; pointer-events: auto;">
-                        <div class="card">
-    
-                            <div class="card-body">
-                                <h5 class="card-title"><%= element.title %> </h5>
-                                <p class="card-text"><%= element.desc %></p>
-                                <p class="card-text"><%= element.genres %></p>
-                                <a href="#" class="btn btn-primary">View Article</a>
-                            </div>
-                        </div>
-                    </li>
-                    <% }) %>
-                </ul>
-            </div>
-    
-    
         </section>
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Your Website 2020</div></footer>
