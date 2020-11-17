@@ -7,7 +7,7 @@ express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
 router.get('/', ensureAuth, function (req, res) {
-    res.render('pages/user_home', {articles: [
+    res.render('pages/home', {articles: [
         {
             title: 'title1',
             desc: 'Desc1',

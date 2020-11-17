@@ -11,7 +11,7 @@ express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
 router.get('/', function (req, res) {
-    res.render('pages/user_management');
+    res.render('pages/user');
 });
 
 router.post('/register', [
@@ -80,6 +80,12 @@ router.post('/login', function(req, res, next){
       failureRedirect:'/users',
       failureFlash: true
     })(req, res, next);
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/');
 });
 
 module.exports = router

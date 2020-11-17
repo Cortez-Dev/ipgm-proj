@@ -27,29 +27,8 @@
             </div>
         </nav>
         <!-- Main -->
-        <section class="about-section-1 text-center" id="public-articles">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2 class="text-white mb-4">Public Articles</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <% articles.forEach(element => { %>
-                      <div class="col-lg-4 col-md-6 col-sm-6 p-2">
-                          <div class="card">
-                              <div class="card-body">
-                                  <h5 class="card-title"><a href="#"><%= element.title %> </a></h5>
-                                  <p class="card-text"><%= element.desc %></p>
-                                  <% element.genres.forEach(genre => { %>
-                                  <a href="#"><%= genre %></a>
-                                  <% } ) %>
-                              </div>
-                          </div>
-                      </div>
-                    <% }) %>
-                </div>
-            </div>
+        <section class="about-section-1 text-center" id="article-view">
+            <!-- insert article view -->
         </section>
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Your Website 2020</div></footer>

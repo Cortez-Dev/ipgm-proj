@@ -53,7 +53,11 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use('/static', express.static('public'))
+app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/home/static', express.static(path.join(__dirname, 'public')));
+app.use('/admin/static', express.static(path.join(__dirname, 'public')));
+app.use('/users/static', express.static(path.join(__dirname, 'public')));
+app.use('/article/static', express.static(path.join(__dirname, 'public')));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
@@ -62,7 +66,7 @@ app.use('/', require('./routes/welcome'));
 app.use('/home', require('./routes/home'));
 app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
-app.use('/editor', require('./routes/editor'));
+app.use('/article', require('./routes/article'));
 
 app.use(function(req, res){
   res.type('text/html');

@@ -15,19 +15,24 @@ router.post('/', [
     check('email', 'Please enter a valid Email').isEmail(),
     check('email', 'Email field is required').not().isEmpty(),
 ], function (req, res) {
-    const email = req.body.email;
+    const remail = req.body.email;
     const errors = validationResult(req);
     if(errors.array().length != 0){
         res.render('pages/welcome', {
         errors: errors.array()
         });
     } else {
-        Email.findOne({email: email})
+        Email.findOne({email: remail})
         .then((email) => {
             if(!email) {
-                const newEmail = new Email({email: email});
+                console.log(email)
+                const newEmail = new Email({email: remail});
                 newEmail.save(function(err){
-                    if(err) console.log(err)
+                    if(err) {
+                        console.log(err)
+                    } else {
+                        res.render('pages/welcome');
+                    }
                 })
             } else {
                 errors = 'Email already exists'
