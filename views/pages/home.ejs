@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Home | Articleium</title>
         <link href="static/css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="static/css/filterizr/style.css">
         <%- include('../partials/head.ejs') %>
     </head>
     <body id="page-top">
@@ -27,28 +26,25 @@
                 </div>
             </div>
         </nav>
-        <!-- Main -->
+
         <section class="about-section-1 text-center min-vh-100" id="public-articles">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2 class="text-white mb-4">Public Articles</h2>
-                    </div>
+                    <h2 class="text-white text-center mx-auto p-4">Public Articles</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                        </ul>
+                        <div class="btn-group-vertical" role="group" aria-label="First group">
+                            <button type="button" class="btn btn-light">Comedy</button>
+                            <button type="button" class="btn btn-light">Politics</button>
+                            <button type="button" class="btn btn-light">Tragedy</button>
+                            <button type="button" class="btn btn-light">Tech</button>
+                          </div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="row m-0">
-                        <% articles.forEach(element => { %>
-                        <div class="col-lg-4 col-md-6 col-sm-6 p-2 m-0" data-category="<%= element.genres %> ">
+                        <div class="row m-0" id="article-container">
+                        <!-- <% articles.forEach(element => { %>
+                        <div class="col-lg-4 col-md-6 col-sm-6 px-2 pb-4 m-0" data-category="<%= element.genres %> ">
                               <div class="card">
                                   <div class="card-body">
                                       <h5 class="card-title"><a href="/article/5fb352bb0bc1456f40de07f4"><%= element.title %> </a></h5>
@@ -57,7 +53,7 @@
                                   </div>
                               </div>
                         </div>
-                        <% }) %>
+                        <% }) %> -->
                         </div>
                     </div>
                 </div>
@@ -68,9 +64,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="static/js/filterizr/jquery-3.3.1.min.js"></script>
-        <script src="static/js/filterizr/jquery.filterizr.min.js"></script>
-        <script src="static/js/filterizr/popper.min.js"></script>
-        <script src="static/js/filterizr/script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="static/js/jquery.js"></script>
+        <script>
+            $(function(){
+                $(".btn").click(function(){
+                    $.post("/home",{
+                        genre: $(this).html()
+                    }, function(data) {
+                        console.log(data.articles);
+                    })
+                })
+            });
+        </script>
     </body>
 </html>

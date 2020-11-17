@@ -11,30 +11,61 @@ router.get('/', ensureAuth, function (req, res) {
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: 'Comedy'
+            genre: 'Comedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: 'Tragedy'
+            genre: 'Tragedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: 'Comedy'
+            genre: 'Comedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: 'Politics'
+            genre: 'Politics'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: 'Tech'
+            genre: 'Tech'
         },
     ]});
 });
+
+router.post('/', ensureAuth, function(req, res) {
+    const genre = req.body.genre;
+    res.send({articles: [
+        {
+            title: 'title1',
+            desc: 'Desc1',
+            genre: 'Comedy'
+        },
+        {
+            title: 'title1',
+            desc: 'Desc1',
+            genre: 'Tragedy'
+        },
+        {
+            title: 'title1',
+            desc: 'Desc1',
+            genre: 'Comedy'
+        },
+        {
+            title: 'title1',
+            desc: 'Desc1',
+            genre: 'Politics'
+        },
+        {
+            title: 'title1',
+            desc: 'Desc1',
+            genre: 'Tech'
+        },
+    ]})
+})
 
 router.get('/someRoute', function (req, res) {
     res.send('Hello SomeRoute!');

@@ -6,11 +6,12 @@ const User = require('../models/User');
 const Profile = require('../models/Profile');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const { ensureGuest } = require('../middleware/auth');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
-router.get('/', function (req, res) {
+router.get('/', ensureGuest, function (req, res) {
     res.render('pages/user');
 });
 
@@ -28,7 +29,7 @@ router.post('/register', [
     check('firstName', 'Please enter your First Name').trim().not().isEmpty().escape(),
     check('lastName', 'Please enter your Last Name').trim().not().isEmpty().escape(),
     check('age', 'Please enter your Age').isNumeric(),
-], function(req, res) {
+], ensureGuest,function(req, res) {
     const errors = validationResult(req);
     if(errors.array().length != 0) {
         console.log(errors.array())
@@ -74,7 +75,7 @@ router.post('/register', [
     }
 });
 
-router.post('/login', function(req, res, next){
+router.post('/login', ensureGuest, function(req, res, next){
     passport.authenticate('local', {
       successRedirect:'/home',
       failureRedirect:'/users',

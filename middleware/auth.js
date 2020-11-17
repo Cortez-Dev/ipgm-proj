@@ -22,6 +22,14 @@ module.exports = {
       }
     },
 
+    ensureGuest: function(req, res, next) {
+      if (req.isAuthenticated()) {
+        res.redirect('/home')
+      } else {
+        return next()
+      }
+    }
+
     // ensureAuthor: function (req, res, next) {
     //   if (req.isAuthenticated()) {
     //     if(req.user._id === req.article.user_id) {
