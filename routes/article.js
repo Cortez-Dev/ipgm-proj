@@ -15,9 +15,28 @@ const Comment = require('../models/Comment');
 const Like = require('../models/Like');
 const Reported = require('../models/Reported');
 const Follow = require('../models/Follow');
+const User = require('../models/User');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
+
+function sendEmailbyId(user_id,message) {
+  User.find({_id:user_id},function(err,data){
+  console.log("sending email to "+ data[0].email);
+  var send = require('gmail-send')({
+  user: 'articleium@gmail.com',
+  pass: 'articleium-admin123',
+  to:   'meet2674shah@gmail.com',
+  subject: 'test subject'
+});
+send({
+  text:    message,
+}, (error, result, fullResult) => {
+  if (error) console.error(error);
+  console.log(result);
+})
+  });
+}
 
 router.get('/new', ensureAuth, function(req, res) {
   res.render('pages/newEditor');
@@ -111,6 +130,9 @@ router.post('/comment-add', ensureAuth, async function(req, res) {
       name: data[0].firstName + ' ' + data[0].lastName
     });
     comment.save();
+    Article.find({_id: req.body.article_id},function(err,article){
+      sendEmailbyId(article[0].author_id,'Hi There');
+    });
     res.send({
       firstName: data[0].firstName,
       lastName: data[0].lastName
