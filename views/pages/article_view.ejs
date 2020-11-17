@@ -31,7 +31,7 @@
     </div>
   </nav>
   <!-- Main -->
-  <div class="author-info" data-article_id = <%= article_id %> >
+  <div class="author-info" data-article_id=<%= article_id %>>
     <h4 style="padding : 10px;color: white;"><strong><%= firstName %> <%= lastName %></strong></h4>
     <hr style="width: 100px;margin-top: 0px;margin-bottom: 5px;background-image: linear-gradient(to right, #52057b, #ea2c62); height:1px;">
     <button id="follow">Follow</button>
@@ -50,7 +50,7 @@
         <p id="article-desc"> <%= desc %> </p>
       </span>
       <div id="main_article">
-          <%- data %>
+        <%- data %>
       </div>
     </div>
     <div id="like-comment">
@@ -60,14 +60,14 @@
     </div>
     <hr style="width: 1224px;margin-top: 10px;margin-bottom: 5px;background-image: linear-gradient(to right, #dd4747, #ffbf00); height:3px;">
     <div id="comment-section">
-        <% comments.forEach(element => { %>
-          <div id="comment-block">
-            <h5><%= element.name %></h5>
-            <p id="comment"><%= element.comment%></p>
-            <hr id="comment-rule">
-          <% } ) %>
+      <% comments.forEach(element => { %>
+      <div id="comment-block">
+        <h5><%= element.name %></h5>
+        <p id="comment"><%= element.comment%></p>
+        <hr id="comment-rule">
+        <% } ) %>
+      </div>
     </div>
-  </div>
     <div id="comment-form">
       <!-- Comment -->
       <div class="form-group">
@@ -95,12 +95,17 @@
     $('.loader').toggle();
 
     function like() {
-      $.post("/article/like",{article_id : document.querySelector('.author-info').dataset.article_id} ,function(res){
+      $.post("/article/like", {
+        article_id: document.querySelector('.author-info').dataset.article_id
+      }, function(res) {
         alert(res);
       });
     }
+
     function flag() {
-      $.post("/article/flag",{article_id : document.querySelector('.author-info').dataset.article_id},function(res){
+      $.post("/article/flag", {
+        article_id: document.querySelector('.author-info').dataset.article_id
+      }, function(res) {
         alert(res);
       });
     }
@@ -124,7 +129,10 @@
           $('.loader').toggle();
           if (toxicity_flag) {
             // SEND POST rEQUEST HERE
-            $.post('/article/comment-add', {comment : text, article_id : document.querySelector('.author-info').dataset.article_id} ,function(data){
+            $.post('/article/comment-add', {
+              comment: text,
+              article_id: document.querySelector('.author-info').dataset.article_id
+            }, function(data) {
               var name = data.firstName + ' ' + data.lastName;
               var comment_string = '<div id="comment-block"><h5>' + name + '</h5><p id = "comment">' + text + '</p><hr id = "comment-rule"></div>';
               $('#comment-section').append(comment_string);
