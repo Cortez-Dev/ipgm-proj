@@ -95,8 +95,16 @@
     $('.loader').toggle();
 
     function like() {
-      $.post("/article/like",{article_id : document.querySelector('.author-info').dataset.article_id});
+      $.post("/article/like",{article_id : document.querySelector('.author-info').dataset.article_id} ,function(res){
+        alert(res);
+      });
     }
+    function flag() {
+      $.post("/article/flag",{article_id : document.querySelector('.author-info').dataset.article_id},function(res){
+        alert(res);
+      });
+    }
+
     var toxicity_flag = true;
 
     function addComment() {

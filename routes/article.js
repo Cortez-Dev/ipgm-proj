@@ -8,6 +8,7 @@ const { appendFileSync } = require('fs-extra');
 const Profile = require('../models/Profile');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
+const Reported = require('../models/Reported');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -113,8 +114,30 @@ router.post('/like' ,  ensureAuth, async function(req, res){
         user_id:req.user._id
       });
       like.save();
+      res.send("Liked");
+    }
+    else{
+    res.send("Already Liked");
     }});
     });
+
+    router.post('/flag' ,  ensureAuth, async function(req, res){
+      Reported.find({
+        article_id:req.body.article_id,
+        user_id:req.user._id
+      },function(err,data){
+        if (data.length === 0) {
+          var reported = new Reported({
+            article_id:req.body.article_id,
+            user_id:req.user._id
+          });
+          reported.save();
+          res.send("Reported");
+        }
+      else{
+        res.send("Already reported");
+      }});
+        });
 
 
 module.exports = router
