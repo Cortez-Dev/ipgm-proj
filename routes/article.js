@@ -14,6 +14,7 @@ const Profile = require('../models/Profile');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
 const Reported = require('../models/Reported');
+const Follow = require('../models/Follow');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -153,6 +154,34 @@ router.post('/flag', ensureAuth, async function(req, res) {
   });
 });
 
+router.post('/follow', ensureAuth, async function(req, res) {
+  var article_id = req.body.article_id;
+  console.log(req.body.article_id);
+  Article.find({
+    _id: article_id
+  }, function(err, article) {
+    console.log({
+      author_id: article[0].author_id,
+      user_id: req.user._id
+    });
+    Follow.find({
+      author_id: article[0].author_id,
+      user_id: req.user._id
+    }, function(err, data) {
+      if (data.length === 0) {
+        var follow = new Follow({
+          author_id: article[0].author_id,
+          user_id: req.user._id
+        });
+        follow.save();
+        res.send("Followed");
+      } else {
+        res.send("Already Following");
+      }
+    });
+  });
+});
+
 router.get('/edit/:id', ensureAuth, function(req, res) {
   const article_id = req.params.id;
   Article.findById(article_id, function(err, article) {
@@ -166,8 +195,11 @@ router.get('/edit/:id', ensureAuth, function(req, res) {
         }
         console.log(data.toString());
         console.log(article.author_id);
-          var temp = {data:data,article_id:article_id};
-          res.render('pages/editArticles',temp);
+        var temp = {
+          data: data,
+          article_id: article_id
+        };
+        res.render('pages/editArticles', temp);
 
       });
     }
@@ -185,8 +217,8 @@ router.post('/old/save', ensureAuth, async function(req, res) {
         console.log(err);
       });
       res.redirect('/home');
-      }
-    });
+    }
   });
+});
 
 module.exports = router
