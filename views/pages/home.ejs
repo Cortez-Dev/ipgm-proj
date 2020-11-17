@@ -72,7 +72,21 @@
                     $.post("/home",{
                         genre: $(this).html()
                     }, function(data) {
-                        console.log(data.articles);
+                        let container = $('#article-container');
+                        container.html('');
+                        response.data.forEach(function(article) {
+                            container.append(`\
+                                <div class="col-lg-4 col-md-6 col-sm-6 px-2 pb-4 m-0">\
+                                    <div class="card">\
+                                        <div class="card-body">\
+                                            <h5 class="card-title"><a href="/article/${article._id}">${article.title}</a></h5>\
+                                            <p class="card-text">${article.desc}</p>\
+                                            <p class="card-text">${article.genre}</p>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            `);
+                        });
                     })
                 })
             });
