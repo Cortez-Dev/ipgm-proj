@@ -6,6 +6,7 @@ const fs = require('fs-extra');
 const { ensureAuth, ensureAdmin } = require('../middleware/auth');
 const { appendFileSync } = require('fs-extra');
 const Profile = require('../models/Profile');
+const Comment = require('../models/Comment');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -64,17 +65,39 @@ router.get('/:id', ensureAuth, function(req, res) {
             console.log(data.toString());
             console.log(article.author_id);
             Profile.find({user_id:article.author_id} ,function(err,profile){
-              var temp = {
-                data: data.toString(),
-                title: article.title,
-                desc : article.desc,
-                firstName : profile[0].firstName,
-                lastName : profile[0].lastName
-              };
-              res.render('pages/article_view',temp);
+              Comment.find({article_id:article_id},function(err,comments){
+                var temp = {
+                  data: data.toString(),
+                  title: article.title,
+                  desc : article.desc,
+                  firstName : profile[0].firstName,
+                  lastName : profile[0].lastName,
+                  article_id :article_id,
+                  comments:comments
+                };
+                res.render('pages/article_view',temp);
+              });
             });
         });
     }
+});
+});
+
+router.post('/comment-add' ,  ensureAuth, async function(req, res) {
+  console.log({
+    comment:req.body.comment,
+    article_id:req.body.article_id,
+    author_id:req.user._id
+  });
+  Profile.find({user_id:req.user._id},function(err,data){
+  var comment = new Comment({
+    comment:req.body.comment,
+    article_id:req.body.article_id,
+    author_id:req.user._id,
+    name:data[0].firstName+' '+data[0].lastName
+  });
+  comment.save();
+  res.send({firstName:data[0].firstName,lastName:data[0].lastName});
 });
 });
 
