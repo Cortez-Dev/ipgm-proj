@@ -95,9 +95,7 @@
     $('.loader').toggle();
 
     function like() {
-      var response = $.post("/like/3", function(data) {
-        console.log(data);
-      });
+      $.post("/article/like",{article_id : document.querySelector('.author-info').dataset.article_id});
     }
     var toxicity_flag = true;
 

@@ -7,6 +7,7 @@ const { ensureAuth, ensureAdmin } = require('../middleware/auth');
 const { appendFileSync } = require('fs-extra');
 const Profile = require('../models/Profile');
 const Comment = require('../models/Comment');
+const Like = require('../models/Like');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -100,5 +101,20 @@ router.post('/comment-add' ,  ensureAuth, async function(req, res) {
   res.send({firstName:data[0].firstName,lastName:data[0].lastName});
 });
 });
+
+router.post('/like' ,  ensureAuth, async function(req, res){
+  Like.find({
+    article_id:req.body.article_id,
+    user_id:req.user._id
+  },function(err,data){
+    if (data.length === 0) {
+      var like = new Like({
+        article_id:req.body.article_id,
+        user_id:req.user._id
+      });
+      like.save();
+    }});
+    });
+
 
 module.exports = router
