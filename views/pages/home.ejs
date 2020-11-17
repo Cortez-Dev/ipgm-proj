@@ -43,17 +43,17 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="row m-0" id="article-container">
-                        <!-- <% articles.forEach(element => { %>
+                        <% articles.forEach(element => { %>
                         <div class="col-lg-4 col-md-6 col-sm-6 px-2 pb-4 m-0" data-category="<%= element.genres %> ">
                               <div class="card">
                                   <div class="card-body">
                                       <h5 class="card-title"><a href="/article/5fb352bb0bc1456f40de07f4"><%= element.title %> </a></h5>
                                       <p class="card-text"><%= element.desc %></p>
-                                      <a href="#"><%= element.genres %></a>
+                                      <p class="card-text"><%= element.genre %></p>
                                   </div>
                               </div>
                         </div>
-                        <% }) %> -->
+                        <% }) %>
                         </div>
                     </div>
                 </div>
@@ -72,9 +72,10 @@
                     $.post("/home",{
                         genre: $(this).html()
                     }, function(data) {
+                        console.log(data);
                         let container = $('#article-container');
                         container.html('');
-                        response.data.forEach(function(article) {
+                        data.articles.forEach(function(article) {
                             container.append(`\
                                 <div class="col-lg-4 col-md-6 col-sm-6 px-2 pb-4 m-0">\
                                     <div class="card">\

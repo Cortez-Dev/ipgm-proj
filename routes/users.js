@@ -11,8 +11,12 @@ const { ensureGuest } = require('../middleware/auth');
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
 
-router.get('/', ensureGuest, function (req, res) {
-    res.render('pages/user');
+router.get('/login', ensureGuest, function (req, res) {
+    res.render('pages/login');
+});
+
+router.get('/register', ensureGuest, function (req, res) {
+    res.render('pages/register');
 });
 
 router.post('/register', [
