@@ -37,15 +37,15 @@
                 <div class="row">
                     <form action="/article/new/save" method="POST">
                         <div class="form-group col-md-12">
-                            <textarea id="editor" name="editor"></textarea>
-                        </div>
-                        <div class="form-group col-md-6">
                             <label for="inputEmail4">Title</label>
                             <input type="text" class="form-control" name="title" required>
                         </div>
-                        <div class="form-group col-md-10">
+                        <div class="form-group col-md-12">
                             <label for="exampleFormControlTextarea1">Description</label>
                             <textarea class="form-control" name="desc" rows="3" required maxlength="400"></textarea>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <textarea id="editor" name="editor"></textarea>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputState">Genre</label>

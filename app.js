@@ -8,6 +8,7 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const connectDB = require('./config/database');
+const flash = require('connect-flash');
 
 dotenv.config({path: './config/config.env'});
 
@@ -52,6 +53,14 @@ app.use(function(req, res, next) {
   res.locals.user = req.user || null
   next()
 })
+
+app.use(flash());
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/home/static', express.static(path.join(__dirname, 'public')));

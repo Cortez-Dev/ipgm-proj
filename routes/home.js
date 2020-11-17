@@ -11,27 +11,27 @@ router.get('/', ensureAuth, function (req, res) {
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: ['comedy', 'tragedy']
+            genres: 'Comedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: ['comedy', 'tragedy']
+            genres: 'Tragedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: ['comedy', 'tragedy']
+            genres: 'Comedy'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: ['comedy', 'tragedy']
+            genres: 'Politics'
         },
         {
             title: 'title1',
             desc: 'Desc1',
-            genres: ['comedy', 'tragedy']
+            genres: 'Tech'
         },
     ]});
 });
