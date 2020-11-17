@@ -40,31 +40,31 @@ router.post('/', ensureAuth, function(req, res) {
     const genre = req.body.genre;
     res.send({articles: [
         {
-            _id: 0;
+            _id: 0,
             title: 'title1',
             desc: 'Desc1',
             genre: 'Comedy'
         },
         {
-            _id: 0;
+            _id: 0,
             title: 'title1',
             desc: 'Desc1',
             genre: 'Tragedy'
         },
         {
-            _id: 0;
+            _id: 0,
             title: 'title1',
             desc: 'Desc1',
             genre: 'Comedy'
         },
         {
-            _id: 0;
+            _id: 0,
             title: 'title1',
             desc: 'Desc1',
             genre: 'Politics'
         },
         {
-            _id: 0;
+            _id: 0,
             title: 'title1',
             desc: 'Desc1',
             genre: 'Tech'
