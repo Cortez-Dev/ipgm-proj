@@ -1,0 +1,19 @@
+<p style="text-align:center"><img alt="dog" src="https://cdn.pixabay.com/photo/2020/11/12/13/44/labrador-retriever-5735582_1280.jpg" style="height:333px; width:500px" /></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<blockquote>
+<p style="text-align:center">Some Quotations</p>
+</blockquote>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque urna diam, malesuada in sodales eu, lobortis non ante. Phasellus dapibus velit a aliquam luctus. Proin pretium porttitor iaculis. Etiam ac augue elit. Ut hendrerit quam eu ex viverra, quis varius ex vehicula. Aliquam sollicitudin nisi mauris, vel faucibus purus malesuada quis. Sed sed pharetra velit. Mauris interdum tempus leo id facilisis. Quisque lacinia nunc nec felis lacinia, eu molestie magna faucibus. Etiam risus lectus, mollis non facilisis id, lobortis semper sem. Nulla non dui quis risus tincidunt varius id sit amet mauris. Quisque non mauris a felis faucibus euismod. In eget felis commodo, viverra odio at, fermentum eros.</p>
+
+<p>Nulla eget luctus mauris. Ut eget est non ante imperdiet facilisis. Vestibulum eu tellus a turpis imperdiet dictum nec in purus. Maecenas condimentum euismod diam, eget finibus elit cursus at. Duis vel pharetra sem. Cras ac ipsum massa. Duis ex nulla, rutrum nec efficitur id, commodo id lacus. Mauris eget justo diam. Praesent lacinia risus a diam faucibus, sed imperdiet erat pharetra. Integer lectus odio, hendrerit nec commodo vitae, aliquam et massa. Ut augue nisi, pulvinar eu interdum eu, sagittis eget metus. Phasellus tristique lacus diam. Aenean quis sodales orci, rutrum condimentum erat. Duis et ex rhoncus, laoreet lorem ut, ullamcorper est. Nullam cursus semper risus sit amet vehicula.</p>
+
+<p>Phasellus tempor sed neque nec ultricies. Integer varius faucibus vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce elementum id purus vitae euismod. Nunc suscipit, libero vitae efficitur rutrum, eros nulla bibendum dolor, et molestie turpis mi at nisi. Sed purus sapien, bibendum vel tincidunt nec, mollis eu justo. Proin eget magna ullamcorper, bibendum turpis et, scelerisque augue. Duis in ligula placerat, venenatis leo in, consequat libero. Sed maximus felis id posuere accumsan. Curabitur ut orci vitae felis accumsan accumsan sit amet quis ligula. Nunc iaculis lacus et quam rhoncus varius. Aliquam vehicula suscipit eros, laoreet posuere est dignissim ut.</p>
+
+<p>Donec aliquam nibh in justo eleifend consequat. Quisque pretium aliquet lorem id sollicitudin. Ut sed sem est. Maecenas risus ex, rhoncus ut hendrerit et, ultrices eget metus. Nunc risus augue, posuere vel velit ac, elementum consectetur sapien. Integer nec mollis sem, in sagittis lorem. Pellentesque lectus diam, ornare a auctor eget, porttitor eget nulla.</p>
+
+<p>Fusce eget rhoncus diam. Maecenas accumsan pharetra ex. Quisque molestie finibus sapien in cursus. In lorem mauris, tristique eget diam eget, maximus fringilla sem. Nam in scelerisque ex. Donec eget augue nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dignissim consectetur elit. Nullam bibendum congue sapien, non facilisis augue tincidunt nec. Curabitur viverra eget justo nec ornare. Nam tempus scelerisque ullamcorper.</p>
+
+<p>&nbsp;</p>
