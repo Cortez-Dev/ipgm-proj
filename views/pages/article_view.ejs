@@ -1,39 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>Home | Articleium</title>
-        <link href="static/css/styles.css" rel="stylesheet" />
-        <%- include('../partials/head.ejs') %>
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="/">Articleium</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/article/new">New Article</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/dashboard">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/logout">Logout</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Main -->
-        <section class="about-section-1 text-center" id="article-view">
-            <!-- insert article view -->
-        </section>
-        <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Your Website 2020</div></footer>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Home | Articleium</title>
+  <link href="static/css/styles.css" rel="stylesheet" />
+  <link href="static/css/article_view.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <%- include('../partials/head.ejs') %>
+</head>
+
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="/">Articleium</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home">Home</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/article/new">New Article</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/dashboard">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main -->
+  <div class="author-info">
+    <!-- <%= firstName %> <%= lastName %> -->
+    <h4 style="padding : 10px;color: white;"><strong><%= firstName %> <%= lastName %></strong></h4>
+    <hr style="width: 100px;margin-top: 0px;margin-bottom: 5px;background-image: linear-gradient(to right, #52057b, #ea2c62); height:1px;">
+    <button id="follow">Follow</button>
+  </div>
+
+  <div id="like-comment">
+    <button id="like" onClick="like();"><i class="md-48 material-icons">thumb_up</i></button>
+    <a href="#comment-section"><button id="comment-button"><i class="material-icons edit-icon">comment</i></button></button></a>
+    <button id="flag" onClick="flag();"><i class="md-48 material-icons">flag</i></button>
+  </div>
+  <section class="about-section-1 text-center" id="article-view">
+    <!-- insert article view -->
+    <div class="content">
+      <span id="article-info">
+        <h1 id="article-title" style="color:white;"><%= title %></h1>
+        <p id="article-desc"> <%= desc %> </p>
+      </span>
+      <div id="main_article">
+          <%- data %>
+      </div>
+    </div>
+    <div id="like-comment">
+      <button id="like" onClick="like();"><i class="md-48 material-icons">thumb_up</i></button>
+      <a href="#comment-section"><button id="comment-button"><i class="material-icons edit-icon">comment</i></button></button></a>
+      <button id="flag" onClick="flag();"><i class="md-48 material-icons">flag</i></button>
+    </div>
+    <hr style="width: 1224px;margin-top: 10px;margin-bottom: 5px;background-image: linear-gradient(to right, #dd4747, #ffbf00); height:3px;">
+    <div id="comment-section">
+      <div id="comment-block">
+        <h5>Commenter Name</h5>
+        <p id="comment">.Some more textThis is some description about the article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is
+          dummy
+          article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
+          article.Some more texthis is some de</p>
+        <hr id="comment-rule">
+      </div>
+      <div id="comment-block">
+        <h5>Commenter Name</h5>
+        <p id="comment">.Some more textThis is some description ption about the article.This is dummy article.Some more texthis is some de</p>
+        <hr id="comment-rule">
+      </div>
+      <div id="comment-block">
+        <h5>Commenter Name</h5>
+        <p id="comment">.Some more textThis is some description about the article.This is dummy article.Some more text.his is some description about the article.This is dummy article.Some more texthis is some description about the article.This is
+          dummy
+          article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy article.Some more texthis is some description about the article.This is dummy
+          article.Some more texthis is some de</p>
+        <hr id="comment-rule">
+      </div>
+    </div>
+    <div id="comment-form">
+      <!-- Comment -->
+      <div class="form-group">
+        <label for="replyFormComment" style="color:white;">Your comment</label>
+        <textarea class="form-control" id="FormComment" rows="5"></textarea>
+      </div>
+
+      <div class="text-center mt-4">
+        <button class="btn btn-info btn-md" onclick="addComment();">Post</button>
+        <div class="loader"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer-->
+  <footer class="footer bg-black small text-center text-white-50">
+    <div class="container">Copyright © Your Website 2020</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+  <script type="text/javascript">
+    $('.loader').toggle();
+
+    function like() {
+      var response = $.post("/like/3", function(data) {
+        console.log(data);
+      });
+    }
+    var toxicity_flag = true;
+
+    function addComment() {
+      $('.loader').toggle();
+      var text = $('#FormComment').val();
+      const threshold = 0.7;
+      toxicity.load(threshold).then(model => {
+        const sentences = [text];
+        model.classify(sentences).then(predictions => {
+          for (i = 0; i < 7; i++) {
+            var prob = predictions[i].results[0].probabilities[1];
+            if (prob > threshold) {
+              alert(predictions[i].label + " was found please remove it!");
+              toxicity_flag = false;
+            }
+          }
+          $('.loader').toggle();
+          if (toxicity_flag) {
+            var name = 'meet shah';
+            var comment_string = '<div id="comment-block"><h5>' + name + '</h5><p id = "comment">' + text + '</p><hr id = "comment-rule"></div>';
+            $('#comment-section').append(comment_string);
+            // SEND POST REQUEST HERE
+          }
+          $('#FormComment').val('');
+          toxicity_flag = true;
+        })
+      });
+    }
+  </script>
+</body>
+
 </html>

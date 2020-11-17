@@ -5,6 +5,7 @@ const Article = require('../models/Article');
 const fs = require('fs-extra');
 const { ensureAuth, ensureAdmin } = require('../middleware/auth');
 const { appendFileSync } = require('fs-extra');
+const Profile = require('../models/Profile');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -36,11 +37,11 @@ router.post('/new/save', ensureAuth, async function(req, res) {
                 console.log(err);
             });
             Article.findByIdAndUpdate(article._id, {path: file}, function(err, newpath) {
-                if (err){ 
-                    console.log(err) 
-                } 
-                else{ 
-                    console.log(`New path: ${newpath}`); 
+                if (err){
+                    console.log(err)
+                }
+                else{
+                    console.log(`New path: ${newpath}`);
                 }
             })
             res.redirect('/home')
@@ -50,20 +51,31 @@ router.post('/new/save', ensureAuth, async function(req, res) {
 
 router.get('/:id', ensureAuth, function(req, res) {
     const article_id = req.params.id;
-    Article.findById(article_id, function (err, article) { 
-    if (err){ 
-        console.log(err); 
-    } 
-    else{ 
+    Article.findById(article_id, function (err, article) {
+    if (err){
+        console.log(err);
+    }
+    else{
         const filepath = article.path;
         fs.readFile(filepath, function(err, data){
             if(err){
                 return console.error(err);
             }
             console.log(data.toString());
+            console.log(article.author_id);
+            Profile.find({user_id:article.author_id} ,function(err,profile){
+              var temp = {
+                data: data.toString(),
+                title: article.title,
+                desc : article.desc,
+                firstName : profile[0].firstName,
+                lastName : profile[0].lastName
+              };
+              res.render('pages/article_view',temp);
+            });
         });
-    } 
-})
+    }
+});
 });
 
 module.exports = router
