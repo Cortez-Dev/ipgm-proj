@@ -24,6 +24,7 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
     "fs-extra": "^9.0.1",
+    "gmail-send": "^1.8.10",
     "method-override": "^3.0.0",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
