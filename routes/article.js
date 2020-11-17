@@ -230,6 +230,9 @@ router.get('/edit/:id', ensureAuth, function(req, res) {
 
 router.post('/old/save', ensureAuth, async function(req, res) {
   const article_id = req.body.article_id;
+  console.log(req.body.status);
+  Article.update({_id:article_id},{$set:{status:req.body.status}},function(err,num){
+  });
   Article.findById(article_id, function(err, article) {
     if (err) {
       console.log(err);
@@ -237,6 +240,7 @@ router.post('/old/save', ensureAuth, async function(req, res) {
       const file = article.path;
       fs.outputFile(file, req.body.editor, err => {
         console.log(err);
+
       });
       res.redirect('/home');
     }
