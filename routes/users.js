@@ -6,7 +6,8 @@ const User = require('../models/User');
 const Profile = require('../models/Profile');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const { ensureGuest } = require('../middleware/auth');
+const { ensureAuth, ensureGuest } = require('../middleware/auth');
+const Article = require('../models/Article');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -34,9 +35,11 @@ router.post('/register', [
     check('lastName', 'Please enter your Last Name').trim().not().isEmpty().escape(),
     check('age', 'Please enter your Age').isNumeric(),
 ], ensureGuest,function(req, res) {
-    const errors = validationResult(req);
-    if(errors.array().length != 0) {
-        console.log(errors.array())
+    const errors = validationResult(req).errors;
+    if(errors.length != 0) {
+        res.render('pages/register', {
+            errors:errors
+        });
     } else {
         const email = req.body.emailsignup;
         const password = req.body.passwordsignup;
@@ -70,7 +73,8 @@ router.post('/register', [
                         newProfile.save(function(err) {
                             if(err) {console.log(err)}
                         });
-                        res.redirect('/users');
+                        req.flash('success','You are now registered and can log in');
+                        res.redirect('/users/login');
                     }
                 });
             });
@@ -87,10 +91,54 @@ router.post('/login', ensureGuest, function(req, res, next){
     })(req, res, next);
 });
 
-router.get('/logout', (req, res) => {
+router.get('/dashboard', ensureAuth, async function (req, res) {
+    const user = req.user._id;
+    const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+        if (err) {
+            console.log(err)
+        } else {
+            return profile;
+        }
+    });
+    const articles = [];
+    const likedArticles = [];
+    const excludedArticles = [];
+    for (const article of profile.articles) {
+        let pushArt = await Article.findById(article, function(err, article) {
+            if(err) {
+                console.log(err);
+            } else {
+                return article;
+            }
+        })
+        if(pushArt.exclude) {
+            excludedArticles.push(pushArt);
+        } else {
+            articles.push(pushArt);
+        }
+    }
+    for (const article of profile.likedArticles) {
+        let pushArt = await Article.findById(article, function(err, article) {
+            if(err) {
+                console.log(err);
+            } else {
+                return article;
+            }
+        })
+        likedArticles.push(pushArt);
+    }
+    res.render('pages/dashboard', {
+        profile: profile,
+        articles: articles,
+        likedArticles: likedArticles,
+        excludedArticles: excludedArticles,
+    });
+});
+
+router.get('/logout', ensureAuth, (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');
-    res.redirect('/');
+    res.redirect('/users/login');
 });
 
 module.exports = router

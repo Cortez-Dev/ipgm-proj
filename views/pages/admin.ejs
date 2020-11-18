@@ -19,35 +19,49 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home">Home</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/dashboard">Dashboard</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/manage">User Management</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/logout">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/admin/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Main -->
-        <section class="about-section-1 text-center" id="public-articles">
-            <div class="container">
+
+        <section class="about-section-1 min-vh-100" id="public-articles">
+            <div class="container-fluid text-white text-justify">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2 class="text-white mb-4">Reported Articles</h2>
+                    <div class="col-md-3 col-lg-2">
+                        <nav class="navbar navbar-default card" role="navigation">
+                            <div>
+                                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">  
+                                    <li class="nav-item m-2"><a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Reported Articles</a></li>
+                                    <li class="nav-item m-2"><a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-4" aria-selected="false">Notifications</a></li>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
-                </div>
-                <div class="row">
-                    <% articles.forEach(element => { %>
-                      <div class="col-lg-4 col-md-6 col-sm-6 p-2">
-                          <div class="card">
-                              <div class="card-body">
-                                  <h5 class="card-title"><a href="#"><%= element.title %> </a></h5>
-                                  <p class="card-text"><%= element.desc %></p>
-                                  <% element.genres.forEach(genre => { %>
-                                  <a href="#"><%= genre %></a>
-                                  <% } ) %>
-                              </div>
-                          </div>
-                      </div>
-                    <% }) %>
+                    <div class="col-md-9 col-lg-10 tab-content">
+                        <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                <div class="row m-0 card-group" id="article-container">
+                                    <% articles.forEach(article => { %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 px-2 py-2 m-0">
+                                          <div class="card text-dark">
+                                              <div class="card-body">
+                                                  <h5 class="card-title"><a href="/article/<%= article._id%>"><%= article.title %></a></h5>
+                                                  <p class="card-text"><%= article.desc %></p>
+                                                  <p class="card-text">Genre: <%= article.genre %></p>
+                                              </div>
+                                          </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -56,5 +70,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </body>
 </html>

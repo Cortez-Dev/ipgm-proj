@@ -4000,7 +4000,7 @@ input[type=button].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #64a19d;
+  background-color: #666666;
 }
 
 .nav-fill > .nav-link,
@@ -10257,7 +10257,8 @@ body {
 
 .about-section-1 {
   padding-top: 5rem;
-  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.9) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("/static/imgs/bg-masthead.jpg");
+  background-attachment: fixed;
 }
 
 .about-section p {

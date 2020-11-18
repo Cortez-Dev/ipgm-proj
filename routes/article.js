@@ -3,13 +3,8 @@ const router = express.Router()
 const path = require('path');
 const Article = require('../models/Article');
 const fs = require('fs-extra');
-const {
-  ensureAuth,
-  ensureAdmin
-} = require('../middleware/auth');
-const {
-  appendFileSync
-} = require('fs-extra');
+const { ensureAuth, ensureAdmin } = require('../middleware/auth');
+const { appendFileSync } = require('fs-extra');
 const Profile = require('../models/Profile');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
@@ -70,9 +65,18 @@ router.post('/new/save', ensureAuth, async function(req, res) {
         if (err) {
           console.log(err)
         } else {
-          console.log(`New path: ${newpath}`);
+          console.log('Path Updated');
         }
-      })
+      });
+      Profile.findOneAndUpdate({user_id: article.author_id}, {
+        $addToSet: { articles: [article._id] }
+      }, function(err, profile) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(`${profile._id} Updated`);
+        }
+      });
       res.redirect('/home')
     }
   })
@@ -159,21 +163,31 @@ router.post('/like', ensureAuth, async function(req, res) {
 });
 
 router.post('/flag', ensureAuth, async function(req, res) {
-  Reported.find({
-    article_id: req.body.article_id,
-    user_id: req.user._id
-  }, function(err, data) {
-    if (data.length === 0) {
-      var reported = new Reported({
-        article_id: req.body.article_id,
-        user_id: req.user._id
-      });
-      reported.save();
-      res.send("Reported");
+  const article_id = req.body.article_id;
+  const article = await Article.findByIdAndUpdate(article_id, {
+    excluded: true
+  }, function(err, data){
+    if (err) {
+      console.log(err)
     } else {
-      res.send("Already reported");
+      console.log('Article removed')
     }
-  });
+  })
+  // Reported.find({
+  //   article_id: req.body.article_id,
+  //   user_id: req.user._id
+  // }, function(err, data) {
+  //   if (data.length === 0) {
+  //     var reported = new Reported({
+  //       article_id: req.body.article_id,
+  //       user_id: req.user._id
+  //     });
+  //     reported.save();
+  //     res.send("Reported");
+  //   } else {
+  //     res.send("Already reported");
+  //   }
+  // });
 });
 
 router.post('/follow', ensureAuth, async function(req, res) {

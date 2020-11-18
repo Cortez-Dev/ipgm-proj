@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title><%= profile.firstName %> <%= profile.lastName %> | Articleium</title>
+        <link href="static/css/styles.css" rel="stylesheet" />
+        <%- include('../partials/head.ejs') %>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="/">Articleium</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/article/new">New Article</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="about-section-1 min-vh-100" id="public-articles">
+            <div class="container-fluid text-white text-justify">
+                <div class="row">
+                    <div class="col-md-3 col-lg-2">
+                        <nav class="navbar navbar-default card" role="navigation">
+                            <div>
+                                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">  
+                                    <li class="nav-item m-2"><a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Your Articles</a></li>
+                                    <li class="nav-item m-2"><a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Liked Articles</a></li>
+                                    <li class="nav-item m-2"><a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Reported</a></li>
+                                    <li class="nav-item m-2"><a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Notifications</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col-md-9 col-lg-10 tab-content">
+                        <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                <div class="row m-0 card-group" id="article-container">
+                                    <% articles.forEach(article => { %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 px-2 py-2 m-0">
+                                          <div class="card text-dark">
+                                              <div class="card-body">
+                                                  <h5 class="card-title"><a href="/article/<%= article._id%>"><%= article.title %></a></h5>
+                                                  <p class="card-text"><%= article.desc %></p>
+                                                  <p class="card-text">Genre: <%= article.genre %></p>
+                                              </div>
+                                          </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                <div class="row m-0 card-group" id="article-container">
+                                    <% likedArticles.forEach(article => { %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 px-2 py-2 m-0">
+                                          <div class="card text-dark">
+                                              <div class="card-body">
+                                                  <h5 class="card-title"><a href="/article/<%= article._id%>"><%= article.title %></a></h5>
+                                                  <p class="card-text"><%= article.desc %></p>
+                                                  <p class="card-text">Genre: <%= article.genre %></p>
+                                              </div>
+                                          </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                <div class="row m-0 card-group" id="article-container">
+                                    <% excludedArticles.forEach(article => { %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 px-2 py-2 m-0">
+                                          <div class="card text-dark">
+                                              <div class="card-body">
+                                                  <h5 class="card-title"><a href="/article/<%= article._id%>"><%= article.title %></a></h5>
+                                                  <p class="card-text"><%= article.desc %></p>
+                                                  <p class="card-text">Genre: <%= article.genre %></p>
+                                              </div>
+                                          </div>
+                                    </div>
+                                    <% }) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                            <div class="col-md-12 col-xs-12 min-vh-100">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Your Website 2020</div></footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </body>
+</html>

@@ -28,12 +28,14 @@
         </nav>
         <!-- Main -->
         <section class="about-section-1" id="public-articles">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 bg-light text-dark p-4 card">
-                        <h3><%= title %></h3>
-                        <p><%= desc %></p>
-                        <article><%- data %></article>
+            <div class="container min-vh-100">
+                <div class="card p-5">
+                    <span id="article-info">
+                      <h1 id="article-title"><%= title %></h1>
+                      <p id="article-desc"> <%= desc %> </p>
+                    </span>
+                    <div id="main_article">
+                      <%- data %>
                     </div>
                 </div>
             </div>
