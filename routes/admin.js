@@ -6,6 +6,7 @@ const { ensureAuth, ensureAdmin, ensureGuest } = require('../middleware/auth');
 const Article = require('../models/Article')
 const User = require('../models/User')
 const Profile = require('../models/Profile')
+const fs = require('fs-extra');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
