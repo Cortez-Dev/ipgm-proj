@@ -23,13 +23,24 @@ router.get('/', ensureAuth, async function (req, res) {
 
 router.post('/', ensureAuth, async function(req, res) {
     const genre = req.body.genre;
-    const articles = await Article.find({status: 'public', exclude: false, genre: genre}, function(err, articles) {
-        if(err) {
-            console.log(err)
-        } else {
-            return articles
-        }
-    }).sort({createdAt: 'descending'}).exec();
+    let articles = [];
+    if (genre === "All") {
+        articles = await Article.find({status: 'public', exclude: false}, function(err, articles) {
+            if(err) {
+                console.log(err)
+            } else {
+                return articles
+            }
+        }).sort({createdAt: 'descending'}).exec();
+    } else {
+        articles = await Article.find({status: 'public', exclude: false, genre: genre}, function(err, articles) {
+            if(err) {
+                console.log(err)
+            } else {
+                return articles
+            }
+        }).sort({createdAt: 'descending'}).exec();
+    }
     res.send({articles: articles});
 })
 

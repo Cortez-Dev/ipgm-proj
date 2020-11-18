@@ -9,6 +9,7 @@ const passport = require('passport');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const Article = require('../models/Article');
 const Like = require('../models/Like');
+const Follow = require('../models/Follow');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -87,12 +88,90 @@ router.post('/register', [
 router.post('/login', ensureGuest, function(req, res, next){
     passport.authenticate('local', {
       successRedirect:'/home',
-      failureRedirect:'/users',
+      failureRedirect:'/users/login',
       failureFlash: true
     })(req, res, next);
 });
 
-router.get('/dashboard', ensureAuth, async function (req, res) {
+// router.get('/dashboard', ensureAuth, async function (req, res) {
+//     const user = req.user._id;
+//     const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+//         if (err) {
+//             console.log(err)
+//         } else {
+//             return profile;
+//         }
+//     });
+//     const articles = [];
+//     const likedArticles = [];
+//     const excludedArticles = [];
+//     const liked = await Like.find({user_id: user}, function(err, data) {
+//         if(err) {
+//             console.log(err);
+//         } else {
+//             return data;
+//         }
+//     })
+//     for (const article of profile.articles) {
+//         let pushArt = await Article.findById(article, function(err, article) {
+//             if(err) {
+//                 console.log(err);
+//             } else {
+//                 return article;
+//             }
+//         })
+//         if(pushArt.exclude) {
+//             excludedArticles.push(pushArt);
+//         } else {
+//             articles.push(pushArt);
+//         }
+//     }
+//     for (const like of liked) {
+//         let pushArt = await Article.findById(like.article_id, function(err, article) {
+//             if(err) {
+//                 console.log(err);
+//             } else {
+//                 return article;
+//             }
+//         })
+//         if(pushArt !==null){
+//           if(!pushArt.exclude) {
+//               likedArticles.push(pushArt);
+//           }
+//         }
+
+//     }
+//     res.render('pages/dashboard', {
+//         profile: profile,
+//         articles: articles,
+//         likedArticles: likedArticles,
+//         excludedArticles: excludedArticles,
+//     });
+// });
+
+router.get('/dashboard', ensureAuth, async (req, res) => {
+    const user = req.user._id;
+    const profile_user = await User.findById(user, function(err, data) {
+        if (err) {
+            console.log(err)
+        } else {
+            return data;
+        }
+    });
+    const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+        if (err) {
+            console.log(err)
+        } else {
+            return profile;
+        }
+    });
+    res.render('pages/profile_edit', {
+        profile: profile,
+        profile_user: profile_user,
+    });
+});
+
+router.get('/articles', ensureAuth, async (req, res) => {
     const user = req.user._id;
     const profile = await Profile.findOne({user_id: user}, function(err, profile) {
         if (err) {
@@ -102,15 +181,6 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
         }
     });
     const articles = [];
-    const likedArticles = [];
-    const excludedArticles = [];
-    const liked = await Like.find({user_id: user}, function(err, data) {
-        if(err) {
-            console.log(err);
-        } else {
-            return data;
-        }
-    })
     for (const article of profile.articles) {
         let pushArt = await Article.findById(article, function(err, article) {
             if(err) {
@@ -119,12 +189,33 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
                 return article;
             }
         })
-        if(pushArt.exclude) {
-            excludedArticles.push(pushArt);
-        } else {
+        if(!pushArt.exclude) {
             articles.push(pushArt);
         }
     }
+    res.render('pages/user_articles', {
+        profile: profile,
+        articles: articles,
+    });
+});
+
+router.get('/liked', ensureAuth, async (req, res) => {
+    const user = req.user._id;
+    const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+        if (err) {
+            console.log(err)
+        } else {
+            return profile;
+        }
+    });
+    const liked = await Like.find({user_id: user}, function(err, data) {
+        if(err) {
+            console.log(err);
+        } else {
+            return data;
+        }
+    });
+    const likedArticles = [];
     for (const like of liked) {
         let pushArt = await Article.findById(like.article_id, function(err, article) {
             if(err) {
@@ -140,11 +231,89 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
         }
 
     }
-    res.render('pages/dashboard', {
+    res.render('pages/liked_articles', {
         profile: profile,
-        articles: articles,
         likedArticles: likedArticles,
-        excludedArticles: excludedArticles,
+    });
+});
+
+router.get('/reported', ensureAuth, async (req, res) => {
+    const user = req.user._id;
+    const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+        if (err) {
+            console.log(err)
+        } else {
+            return profile;
+        }
+    });
+    const excludedArticles = [];
+    for (const article of profile.articles) {
+        let pushArt = await Article.findById(article, function(err, article) {
+            if(err) {
+                console.log(err);
+            } else {
+                return article;
+            }
+        })
+        if(pushArt.exclude) {
+            excludedArticles.push(pushArt);
+        }
+    }    
+    res.render('pages/reported_articles', {
+        profile: profile,
+        articles: excludedArticles,
+    });
+});
+
+router.get('/followed', ensureAuth, async (req, res) => {
+    const user = req.user._id;
+    const profile = await Profile.findOne({user_id: user}, function(err, profile) {
+        if (err) {
+            console.log(err)
+        } else {
+            return profile;
+        }
+    });
+    const followed = await Follow.find({
+        user_id: user
+    }, function(err, data){
+        if(err){
+            console.log(err)
+        } else {
+            return data;
+        }
+    });
+    let articlesarray = [];
+    for (const follow of followed) {
+        let author = await Profile.findOne({
+            user_id: follow.author_id
+        }, function(err, data){
+            if(err) {
+                console.log(err)
+            } else {
+                return data;
+            }
+        });
+        let pushArt = await Article.find({
+            author_id: follow.author_id,
+            status: 'private',
+            exclude: false
+        }, function(err, data){
+            if(err) {
+                console.log(err)
+            } else {
+                return data;
+            }
+        });
+        articlesarray.push({
+            author: author,
+            articles: pushArt,
+        })
+    }
+    console.log(articlesarray)
+    res.render('pages/followed', {
+        profile: profile,
+        articlesarray: articlesarray,
     });
 });
 
@@ -152,6 +321,66 @@ router.get('/logout', ensureAuth, (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are logged out');
     res.redirect('/users/login');
+});
+
+
+router.get('/:id', ensureAuth, async function(req, res) {
+    const author_id = req.params.id;
+    const profile_user = await User.findById(author_id, function(err, data) {
+        if (err) {
+            console.log(err)
+        } else {
+            return data;
+        }
+    });
+    const profile = await Profile.findOne({user_id: author_id}, function(err, data) {
+        if (err) {
+            console.log(err)
+        } else {
+            return data;
+        }
+    });
+    const articles = [];
+    for (const article of profile.articles) {
+        let pushArt = await Article.findById(article, function(err, article) {
+            if(err) {
+                console.log(err);
+            } else {
+                return article;
+            }
+        })
+        if(pushArt.exclude) {
+            excludedArticles.push(pushArt);
+        } else {
+            articles.push(pushArt);
+        }
+    }
+    res.render('pages/profile_view', {
+        profile: profile,
+        profile_user: profile_user,
+        articles: articles,
+    })
+});
+
+router.post('/:id/follow', ensureAuth, async function(req, res) {
+    const user_id = req.user._id;
+    const profile_id = req.params.id;
+    console.log(user_id)
+    console.log(profile_id)
+    let follow = await Follow.findOne({
+        author_id: profile_id,
+        user_id: user_id
+    });
+    if(follow) {
+        res.send('You already follow the Author!')
+    } else {
+        follow = new Follow({
+            author_id: profile_id,
+            user_id: user_id
+        });
+        follow.save();
+        res.send('You are now following the author!')
+    }
 });
 
 module.exports = router

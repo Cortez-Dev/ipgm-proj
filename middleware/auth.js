@@ -10,7 +10,6 @@ module.exports = {
     },
 
     ensureAdmin: function (req, res, next) {
-      console.log(req.user)
       if (req.isAuthenticated()) {
         if(req.user.role === 'admin') {
           return next()
@@ -28,19 +27,28 @@ module.exports = {
       } else {
         return next()
       }
-    }
+    },
 
-    // ensureAuthor: function (req, res, next) {
-    //   if (req.isAuthenticated()) {
-    //     if(req.user._id === req.article.user_id) {
-    //       return next()
-    //     } else {
-    //       res.redirect('/admin')
-    //     }
-    //   } else {
-    //     res.redirect('/users')
-    //   }
-    // },
+    ensureAdminGuest: function(req, res, next) {
+      console.log(req.user)
+      if (req.isAuthenticated() && req.user.role === 'admin') {
+        res.redirect('/admin/home')
+      } else {
+        return next()
+      }
+    },
+
+    ensureAuthor: function (req, res, next) {
+      if (req.isAuthenticated()) {
+        if(req.user._id === req.article.user_id) {
+          return next()
+        } else {
+          res.redirect('/home')
+        }
+      } else {
+        res.redirect('/users/login')
+      }
+    },
 
 }
   

@@ -82,64 +82,28 @@ router.post('/new/save', ensureAuth, async function(req, res) {
   })
 });
 
-router.get('/:id', ensureAuth, function(req, res) {
-  const article_id = req.params.id;
-  Article.findById(article_id, function(err, article) {
-    if (err) {
-      console.log(err);
-    } else {
-      const filepath = article.path;
-      fs.readFile(filepath, function(err, data) {
-        if (err) {
-          return console.error(err);
-        }
-        console.log(data.toString());
-        console.log(article.author_id);
-        Profile.find({
-          user_id: article.author_id
-        }, function(err, profile) {
-          Comment.find({
-            article_id: article_id
-          }, function(err, comments) {
-            var temp = {
-              data: data.toString(),
-              title: article.title,
-              desc: article.desc,
-              firstName: profile[0].firstName,
-              lastName: profile[0].lastName,
-              article_id: article_id,
-              comments: comments
-            };
-            res.render('pages/article_view', temp);
-          });
-        });
-      });
-    }
-  });
-});
-
 router.post('/comment-add', ensureAuth, async function(req, res) {
   console.log({
     comment: req.body.comment,
     article_id: req.body.article_id,
     author_id: req.user._id
   });
-  Profile.find({
+  Profile.findOne({
     user_id: req.user._id
   }, function(err, data) {
-    var comment = new Comment({
+    const comment = new Comment({
       comment: req.body.comment,
       article_id: req.body.article_id,
       author_id: req.user._id,
-      name: data[0].firstName + ' ' + data[0].lastName
+      name: data.firstName + ' ' + data.lastName
     });
     comment.save();
-    Article.find({_id: req.body.article_id},function(err,article){
-      sendEmailbyId(article[0].author_id,`${data[0].firstName} ${data[0].lastName} has commented on article ${article[0].title}`);
+    Article.findOne({_id: req.body.article_id},function(err,article){
+      sendEmailbyId(article.author_id,`${data.firstName} ${data.lastName} has commented on article ${article.title}`);
     });
     res.send({
-      firstName: data[0].firstName,
-      lastName: data[0].lastName
+      firstName: data.firstName,
+      lastName: data.lastName
     });
   });
 });
@@ -150,7 +114,7 @@ router.post('/like', ensureAuth, async function(req, res) {
     user_id: req.user._id
   }, async function(err, data) {
     if (data.length === 0) {
-      var like = new Like({
+      const like = new Like({
         article_id: req.body.article_id,
         user_id: req.user._id
       });
@@ -239,22 +203,20 @@ router.post('/flag', ensureAuth, async function(req, res) {
 });
 
 router.post('/follow', ensureAuth, async function(req, res) {
-  var article_id = req.body.article_id;
+  const article_id = req.body.article_id;
   console.log(req.body.article_id);
-  Article.find({
-    _id: article_id
-  }, function(err, article) {
+  Article.findById(article_id, function(err, article) {
     console.log({
-      author_id: article[0].author_id,
+      author_id: article.author_id,
       user_id: req.user._id
     });
-    Follow.find({
-      author_id: article[0].author_id,
+    Follow.findOne({
+      author_id: article.author_id,
       user_id: req.user._id
     }, function(err, data) {
-      if (data.length === 0) {
+      if (data === null) {
         var follow = new Follow({
-          author_id: article[0].author_id,
+          author_id: article.author_id,
           user_id: req.user._id
         });
         follow.save();
@@ -285,6 +247,40 @@ router.get('/edit/:id', ensureAuth, function(req, res) {
         };
         res.render('pages/editArticles', temp);
 
+      });
+    }
+  });
+});
+
+router.get('/:id', ensureAuth, function(req, res) {
+  const article_id = req.params.id;
+  Article.findById(article_id, function(err, article) {
+    if (err) {
+      console.log(err);
+    } else {
+      const filepath = article.path;
+      fs.readFile(filepath, function(err, data) {
+        if (err) {
+          return console.error(err);
+        }
+        Profile.findOne({
+          user_id: article.author_id
+        }, function(err, profile) {
+          Comment.find({
+            article_id: article_id
+          }, function(err, comments) {
+            var temp = {
+              data: data.toString(),
+              title: article.title,
+              desc: article.desc,
+              firstName: profile.firstName,
+              lastName: profile.lastName,
+              article_id: article_id,
+              comments: comments
+            };
+            res.render('pages/article_view', temp);
+          });
+        });
       });
     }
   });

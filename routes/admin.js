@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const passport = require('passport');
-const { ensureAuth, ensureAdmin, ensureGuest } = require('../middleware/auth');
+const { ensureAuth, ensureAdmin, ensureGuest, ensureAdminGuest } = require('../middleware/auth');
 const Article = require('../models/Article')
 const User = require('../models/User')
 const Profile = require('../models/Profile')
@@ -29,7 +29,7 @@ send({
   });
 }
 
-router.get('/', function (req, res) {
+router.get('/', ensureAdminGuest, function (req, res) {
     res.render('pages/admin_login');
 });
 
