@@ -290,6 +290,32 @@ router.get('/edit/:id', ensureAuth, function(req, res) {
   });
 });
 
+router.get('/delete/:id', ensureAuth, async function(req, res) {
+  const article_id = req.params.id;
+  const article = await Article.findById(article_id, function(err, article) {
+    if (err) {
+      console.log(err);
+    } else {
+      return article
+    }
+  });
+  const path = article.path;
+  try {
+    await fs.remove(path)
+    console.log('success!')
+  } catch (err) {
+    console.error(err)
+  }
+  await Article.findByIdAndDelete(article_id, function(err, article) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Deleted');
+    }
+  });
+  res.redirect('/users/dashboard');
+});
+
 router.post('/old/save', ensureAuth, async function(req, res) {
   const article_id = req.body.article_id;
   console.log(req.body.status);

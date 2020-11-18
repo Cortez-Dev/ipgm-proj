@@ -26,6 +26,8 @@
                               Filter
                             </a>
                             <div class="dropdown-menu" aria-labelledby="filterDropdown">
+                                <div class="dropdown-item">All</div>
+                                <div></div>
                               <a class="dropdown-item" href="#">Action</a>
                               <a class="dropdown-item" href="#">Another action</a>
                               <div class="dropdown-divider"></div>
@@ -87,9 +89,12 @@
                                           <div class="card text-dark">
                                               <div class="card-body">
                                                   <h5 class="card-title"><a href="/article/<%= article._id%>"><%= article.title %></a></h5>
-                                                  <a href="/article/edit/<%= article._id%>">Edit..</a></h5>
                                                   <p class="card-text"><%= article.desc %></p>
                                                   <p class="card-text">Genre: <%= article.genre %></p>
+                                              </div>
+                                              <div class="card-footer">
+                                                <a class="btn btn-primary" href="/article/edit/<%= article._id%>">Edit</a></h5>
+                                                <a class="btn btn-danger" href="/article/delete/<%= article._id%>">Delete</a></h5>
                                               </div>
                                           </div>
                                     </div>
