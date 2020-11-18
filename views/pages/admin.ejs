@@ -31,7 +31,7 @@
                     <div class="col-md-3 col-lg-2">
                         <nav class="navbar navbar-default card" role="navigation">
                             <div>
-                                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">  
+                                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <li class="nav-item m-2"><a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Reported Articles</a></li>
                                     <li class="nav-item m-2"><a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-4" aria-selected="false">Notifications</a></li>
                                 </ul>
@@ -50,6 +50,10 @@
                                                   <p class="card-text"><%= article.desc %></p>
                                                   <p class="card-text">Genre: <%= article.genre %></p>
                                               </div>
+                                              <div class="card-footer">
+                                                <a class="btn btn-warning" href="/admin/warn/<%= article.author_id%>/<%= article._id%>">Warn</a></h5>
+                                                <a class="btn btn-danger" href="/admin/delete/<%= article._id%>">Delete</a></h5>
+                                              </div>
                                           </div>
                                     </div>
                                     <% }) %>
@@ -58,7 +62,7 @@
                         </div>
                         <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-4-tab">
                             <div class="col-md-12 col-xs-12 min-vh-100">
-                                
+
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,7 @@ router.post('/register', [
             email: email,
             password_hash: password
         });
-    
+
         bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password_hash, salt, function(err, hash){
                 if(err){
@@ -133,9 +133,12 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
                 return article;
             }
         })
-        if(!pushArt.exclude) {
-            likedArticles.push(pushArt);
+        if(pushArt !==null){
+          if(!pushArt.exclude) {
+              likedArticles.push(pushArt);
+          }
         }
+
     }
     res.render('pages/dashboard', {
         profile: profile,
