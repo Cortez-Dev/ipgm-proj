@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { ensureAuth, ensureGuest } = require('../middleware/auth');
 const Article = require('../models/Article');
+const Like = require('../models/Like');
 
 express().set('views', path.join(__dirname, 'views'));
 express().set('view engine', 'ejs')
@@ -103,6 +104,13 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
     const articles = [];
     const likedArticles = [];
     const excludedArticles = [];
+    const liked = await Like.find({user_id: user}, function(err, data) {
+        if(err) {
+            console.log(err);
+        } else {
+            return data;
+        }
+    })
     for (const article of profile.articles) {
         let pushArt = await Article.findById(article, function(err, article) {
             if(err) {
@@ -117,15 +125,17 @@ router.get('/dashboard', ensureAuth, async function (req, res) {
             articles.push(pushArt);
         }
     }
-    for (const article of profile.likedArticles) {
-        let pushArt = await Article.findById(article, function(err, article) {
+    for (const like of liked) {
+        let pushArt = await Article.findById(like.article_id, function(err, article) {
             if(err) {
                 console.log(err);
             } else {
                 return article;
             }
         })
-        likedArticles.push(pushArt);
+        if(!pushArt.exclude) {
+            likedArticles.push(pushArt);
+        }
     }
     res.render('pages/dashboard', {
         profile: profile,

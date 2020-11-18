@@ -10,7 +10,6 @@ const Profile = new Schema({
     desc: {type: String, trim: true, default: '.... quite a mysterious person'},
     articles: [{type: Schema.Types.ObjectId, ref: 'Article'}],
     likedArticles: [{type: Schema.Types.ObjectId, ref: 'Articles'}],
-    notifications: [{type: String, trim: true}],
 });
 
 module.exports = mongoose.model('Profile', Profile);
