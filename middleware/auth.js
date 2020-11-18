@@ -5,7 +5,7 @@ module.exports = {
       if (req.isAuthenticated()) {
         return next()
       } else {
-        res.redirect('/users')
+        res.redirect('/users/login')
       }
     },
 
@@ -18,7 +18,7 @@ module.exports = {
           res.redirect('/admin')
         }
       } else {
-        res.redirect('/users')
+        res.redirect('/users/login')
       }
     },
 
