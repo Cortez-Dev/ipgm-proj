@@ -1,0 +1,75 @@
+<p><img alt="Image for post" src="https://miro.medium.com/max/1080/0*iLUcfpK2XT10HEn4" style="height:337px; width:960px" /></p>
+
+<p>Wondered how Google comes up with movies that are similar to the ones you like? After reading this post you will be able to build one such recommendation system for yourself.</p>
+
+<p>It turns out that there are (mostly) three ways to build a recommendation engine:</p>
+
+<ol>
+	<li>Popularity based recommendation engine</li>
+	<li>Content based recommendation engine</li>
+	<li>Collaborative filtering based recommendation engine</li>
+</ol>
+
+<p>Now you might be thinking &ldquo;That&rsquo;s interesting. But, what are the differences between these recommendation engines?&rdquo;. Let me help you out with that.</p>
+
+<p><strong>Popularity based recommendation engine:</strong></p>
+
+<p>Perhaps, this is the simplest kind of recommendation engine that you will come across. The trending list you see in YouTube or Netflix is based on this algorithm. It keeps a track of view counts for each movie/video and then lists movies based on views in descending order(highest view count to lowest view count). Pretty simple but, effective. Right?</p>
+
+<p><strong>Content based recommendation engine:</strong></p>
+
+<p>This type of recommendation systems, takes in a movie that a user currently likes as input. Then it analyzes the contents (storyline, genre, cast, director etc.) of the movie to find out other movies which have similar content. Then it ranks similar movies according to their similarity scores and recommends the most relevant movies to the user.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Meet the Algorithm:&nbsp;<em>Apriori</em></strong></p>
+
+<p><em>Apriori</em>&nbsp;is an algorithm used to identify frequent item sets (in our case, item pairs). It works by first identifying individual items that satisfy a minimum occurrence threshold. It then extends the item set, by looking at all possible pairs that still satisfy the specified threshold. As a final step, we calculate the following three metrics that are central to this algorithm.</p>
+
+<p><strong>support</strong><strong>:&nbsp;</strong>This is the percentage of orders that contains the item or item set. For example, if there are 5 orders in total and an item A occurs in 3 of them, so:</p>
+
+<p>support (A) = 3/5 or 60%</p>
+
+<p><strong>confidence</strong><strong>:</strong>&nbsp;Given two items, A and B, confidence measures the percentage of times that item B is purchased, given that item A was purchased. This is expressed as:</p>
+
+<p>confidence(A-&gt;B) = support(A,B) / support(A)</p>
+
+<p><strong>lift</strong><strong>:</strong>&nbsp;Given two items, A and B, lift indicates whether there is a relationship between A and B, or whether the two items occur together in the same order simply by chance (ie: at random). Unlike the confidence metric whose value may vary depending on direction (eg: confidence(A-&gt;B) may be different from confidence(B-&gt;A)), lift has no direction. This means that the lift(A,B) is always equal to the lift(B,A):</p>
+
+<p>lift(A,B) = lift(B,A) = support(A,B) / (support(A) * support(B))</p>
+
+<p>lift &gt; 1 implies that there is a positive relationship between A and B.</p>
+
+<p>(ie:&nbsp; A and B occur together more often than they would have appeared together purely by chance)</p>
+
+<p><strong>Technical Details:</strong></p>
+
+<p>All the data analysis is performed using Python Pandas. Pandas is a python library that offers data structures and operations for manipulating and analyzing numerical tables.</p>
+
+<p>The following steps are explained below:</p>
+
+<ol>
+	<li>The dataset containing the transaction records from a retail store is read into memory into a pandas&nbsp;<em>dataframe:</em>&nbsp;a data structure to hold tabular data in rows and columns. A new dataframe is created containing the list of all possible item-item pairs.</li>
+	<li>New columns are added to the dataframe and populated using custom python functions created to calculate the three metrics &ndash;&nbsp;<em>support, confidence&nbsp;</em>and<em>&nbsp;lift</em>&nbsp;&ndash; defined in the previous section.</li>
+	<li>those rows are filtered out that don&rsquo;t match the minimum threshold for&nbsp;<em>support</em>,&nbsp;<em>confidence</em>&nbsp;and&nbsp;<em>lift.</em></li>
+</ol>
+
+<p><strong>Leveraging the Power of Python:</strong></p>
+
+<p>For even a relatively smaller dataset of 1000 unique items, there can be roughly half a million item pairs (from elementary Permutations and Combinations). And keeping these values in memory can prove quite a handful for your PC. This is where a Python generator comes handy.</p>
+
+<p>A python Generator is a special type of function that returns an iterable sequence of items. However, unlike regular functions which return all the values at once (eg: returning all the elements of a list), a generator&nbsp;yields&nbsp;one value at a time. To get the next value in the set, we must ask for it &ndash; either by explicitly calling the generator&rsquo;s built-in &ldquo;next&rdquo; method, or implicitly via a for loop.</p>
+
+<p>This is a great property of generators because it means that we don&rsquo;t have to store all of the values in memory at once. This feature makes generators perfect for creating item pairs and counting their frequency of co-occurrence.</p>
+
+<p><strong>Conclusion</strong>:</p>
+
+<p>With a smart implementation of Apriori using Python iterators and generators, a powerful solution is built to find product recommendations for Customers. Some popular examples of product pairs can be as trivial as paper plates and napkins (as seen in the sample output), while others can be more surprising such as beer and diapers.</p>
+
+<p><img alt="" src="https://cdn.shortpixel.ai/client/to_avif,q_glossy,ret_img,w_970,h_124/https://labs.sogeti.com/wp-content/uploads/2019/01/Sample-Output-1024x131.jpg" style="height:124px; width:970px" /></p>
+
+<p>&nbsp;</p>
+
+<p>Example :</p>
+
+<p style="text-align:center"><iframe frameborder="0" height="640" scrolling="yes" src="http://localhost:3000/home" width="320"></iframe></p>
