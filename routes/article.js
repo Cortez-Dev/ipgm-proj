@@ -299,6 +299,7 @@ router.get('/delete/:id', ensureAuth, async function(req, res) {
       return article
     }
   });
+  const author = article.author_id;
   const path = article.path;
   try {
     await fs.remove(path)
@@ -311,6 +312,15 @@ router.get('/delete/:id', ensureAuth, async function(req, res) {
       console.log(err);
     } else {
       console.log('Deleted');
+    }
+  });
+  await Profile.findOneAndUpdate({user_id: author}, {
+    $pull: { articles: article_id }
+  },function(err, profile) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('Article removed from Profile');
     }
   });
   res.redirect('/users/dashboard');
