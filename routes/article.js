@@ -21,8 +21,8 @@ function sendEmailbyId(user_id,message) {
   var send = require('gmail-send')({
   user: 'articleium@gmail.com',
   pass: 'articleium-admin123',
-  to:   'meet2674shah@gmail.com',
-  subject: 'test subject'
+  to:   data[0].email,
+  subject: 'Articleium Notifications'
 });
 send({
   text:    message,
@@ -148,13 +148,37 @@ router.post('/like', ensureAuth, async function(req, res) {
   Like.find({
     article_id: req.body.article_id,
     user_id: req.user._id
-  }, function(err, data) {
+  }, async function(err, data) {
     if (data.length === 0) {
       var like = new Like({
         article_id: req.body.article_id,
         user_id: req.user._id
       });
       like.save();
+      const profile = await Profile.findOne({user_id: req.user._id}, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          return data;
+        }
+      })
+      const article = await Article.findById(req.body.article_id, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          return data;
+        }
+      })
+      User.findByIdAndUpdate(article.author_id, {
+        $addToSet: {notifications: [`${profile.firstName} ${profile.lastName} has liked article ${article.title}`]}
+      }, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          console.log('Success')
+        }
+      })
+      sendEmailbyId(article.author_id, `${profile.firstName} ${profile.lastName} has liked article ${article.title}`)
       res.send("Liked");
     } else {
       res.send("Already Liked");
@@ -164,13 +188,37 @@ router.post('/like', ensureAuth, async function(req, res) {
 
 router.post('/flag', ensureAuth, async function(req, res) {
   const article_id = req.body.article_id;
-  const article = await Article.findByIdAndUpdate(article_id, {
+  const user_id = req.user._id;
+  await Article.findByIdAndUpdate(article_id, {
     exclude: true
-  }, function(err, data){
+  }, async function(err, data){
     if (err) {
       console.log(err)
     } else {
-      console.log('Article removed')
+      const profile = await Profile.findOne({user_id: user_id}, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          return data;
+        }
+      })
+      const article = await Article.findById(article_id, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          return data;
+        }
+      })
+      User.findByIdAndUpdate(article.author_id, {
+        $addToSet: {notifications: [`${profile.firstName} ${profile.lastName} has reported article ${article.title}`]}
+      }, function(err, data) {
+        if(err) {
+          console.log(err)
+        } else {
+          console.log('Report Success')
+        }
+      })
+      sendEmailbyId(article.author_id, `${profile.firstName} ${profile.lastName} has reported article ${article.title}`)
     }
   })
   // Reported.find({
