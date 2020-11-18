@@ -165,7 +165,7 @@ router.post('/like', ensureAuth, async function(req, res) {
 router.post('/flag', ensureAuth, async function(req, res) {
   const article_id = req.body.article_id;
   const article = await Article.findByIdAndUpdate(article_id, {
-    excluded: true
+    exclude: true
   }, function(err, data){
     if (err) {
       console.log(err)

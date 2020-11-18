@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Follow = new Schema({
-    author_id: {type: Schema.Types.ObjectId, ref: 'Article'},
+    author_id: {type: Schema.Types.ObjectId, ref: 'User'},
     user_id: {type: Schema.Types.ObjectId, ref: 'User'},
 }, {timestamps: true});
 

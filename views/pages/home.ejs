@@ -39,7 +39,11 @@
                             <button type="button" class="btn btn-light">Politics</button>
                             <button type="button" class="btn btn-light">Tragedy</button>
                             <button type="button" class="btn btn-light">Tech</button>
-                          </div>
+                            <button type="button" class="btn btn-light">Tutorial</button>
+                            <button type="button" class="btn btn-light">Art</button>
+                            <button type="button" class="btn btn-light">Tech</button>
+                            <button type="button" class="btn btn-light">Fiction</button>
+                        </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="row m-0 card-group" id="article-container">
@@ -47,7 +51,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 px-2 pb-4 m-0">
                               <div class="card">
                                   <div class="card-body">
-                                      <h5 class="card-title"><a href="/article/5fb352bb0bc1456f40de07f4"><%= element.title %> </a></h5>
+                                      <h5 class="card-title"><a href="/article/<%= element._id %>"><%= element.title %> </a></h5>
                                       <p class="card-text"><%= element.desc %></p>
                                       <p class="card-text"><%= element.genre %></p>
                                   </div>
