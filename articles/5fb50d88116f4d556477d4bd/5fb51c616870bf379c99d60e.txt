@@ -1,0 +1,342 @@
+<p style="text-align:center"><img alt="restapiimg" src="https://miro.medium.com/max/720/1*xJDYeNWod6dfmp0KjTMXDw.png" style="height:348px; width:640px" /></p>
+
+<p style="text-align:center">&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><span style="font-size:10px">Since the invention of the internet, we have been using different applications and web pages to get data for various resources. However, have you ever thought, where does this data come from? Well, it&rsquo;s the servers from where we get the data. So in this article on What is REST API, let us look into how a client communicates with the servers to extract the required information.</span></p>
+
+<p><span style="font-size:10px">The following topics will be covered in this article:</span></p>
+
+<ul>
+	<li><span style="font-size:10px">Need of REST API</span></li>
+	<li><span style="font-size:10px">What is REST API?</span></li>
+	<li><span style="font-size:10px">Principles of REST API</span></li>
+	<li><span style="font-size:10px">Methods of REST API</span></li>
+	<li><span style="font-size:10px">How to create a REST API?</span></li>
+</ul>
+
+<p><span style="font-size:10px">Now, before I define REST API for you, let me take you through an example to make you understand the need of REST API.</span></p>
+
+<h1>Need of REST API</h1>
+
+<p>Consider a scenario where you are using the Book My Show app. Now, obviously, this application needs a lot of Input data, as the data present in the application is never static. Either it is movies getting released on a frequent basis, or various cities showing different languages movies at various times of the day. It&rsquo;s never static which implies to the fact that data is always changing in these applications.</p>
+
+<p>Now, where do you think we get this data from?</p>
+
+<p>Well, this data is received from the Server or most commonly known as a Web-server. So, the client requests the server for the required information, via an API, and then, the server sends a response to the client.</p>
+
+<p>Over here, the response sent to the client is in the form of an HTML Web Page. But, do you think this is an apt response that you would expect when you send a request?</p>
+
+<p>Well, I am assuming the fact that you would say NO. Since, you would prefer the data to be returned in the form of structured format, rather than the complete Web page.</p>
+
+<p>So, for such reasons, the data returned by the server, in response to the request of the client is either in the format of JSON or XML. Both JSON and XML format have a proper hierarchical structure of data.</p>
+
+<p>Now, this sounds quite simple, right?</p>
+
+<p>But, the only issue which is present in this framework till now is that you have to use a lot of methods to get the required information. To the fact, using these methods to retrieve information, becomes quite cumbersome when you require complex data.</p>
+
+<p>So, this is where REST API comes into the picture. The REST API creates an object, and thereafter send the values of an object in response to the client.</p>
+
+<p>Now, that you know the need of REST, next in this article, let us look into the What is REST API?</p>
+
+<h1>What is REST API?</h1>
+
+<p>REST suggests to create an object of the data requested by the client and send the values of the object in response to the user. For example, if the user is requesting for a movie in Bangalore at a certain place and time, then you can create an object on the server side.</p>
+
+<p>So, over here, you have an object and you are sending the state of an object. This is why REST is known as Representational State Transfer.</p>
+
+<p><em>If I have to define REST, then, Representational State Transfer a.k.a REST is an architectural style as well as an approach for communications purpose that is often used in various web services development.</em></p>
+
+<p>The architectural style of REST helps in leveraging the lesser use of bandwidth to make an application more suitable for the internet. It is often regarded as the &ldquo;&nbsp;<em>language of the internet&nbsp;</em>&ldquo; and is completely based on the resources.</p>
+
+<p>To understand better, let&rsquo;s dive a little deeper and see how exactly does a REST API work. Basically, the REST API breaks down a transaction in order to create small modules. Now, each of these modules is used to address a specific part of the transaction. This approach provides more flexibility but requires a lot of effort to be built from the very scratch.</p>
+
+<p>So, now that you know what is REST API, let us next understand the constraints or principles which must be satisfied for an application to be regarded as REST API.</p>
+
+<h1><strong>Principles of REST API</strong></h1>
+
+<p>Well, there are six ground principles laid down by Dr. Fielding who was the one to define the REST API design in 2000. Below are the six guiding principles of REST:</p>
+
+<h2>Stateless</h2>
+
+<p>The requests sent from a client to a server will contain all the required information to make the server understand the requests sent from the client. This can be either a part of URL, query-string parameters, body, or even headers. The URL is used to uniquely identify the resource and the body holds the state of the requesting resource. Once the server processes the request, a response is sent to the client through body, status or headers.</p>
+
+<h2>Client-Server</h2>
+
+<p>The client-server architecture enables a uniform interface and separates clients from the servers. This enhances the portability across multiple platforms as well as the scalability of the server components.</p>
+
+<h2>Uniform Interface</h2>
+
+<p>To obtain the uniformity throughout the application, REST has the following four interface constraints:</p>
+
+<ul>
+	<li>Resource identification</li>
+	<li>Resource Manipulation using representations</li>
+	<li>Self-descriptive messages</li>
+	<li>Hypermedia as the engine of application state</li>
+</ul>
+
+<h2>Cacheable</h2>
+
+<p>In order to provide a better performance, the applications are often made cacheable. This is done by labeling the response from the server as cacheable or non-cacheable either implicitly or explicitly. If the response is defined as cacheable, then the client cache can reuse the response data for equivalent responses in the future.</p>
+
+<h2>Layered system</h2>
+
+<p>The layered system architecture allows an application to be more stable by limiting component behavior. This type of architecture helps in enhancing the application&rsquo;s security as components in each layer cannot interact beyond the next immediate layer they are in. Also, it enables load balancing and provides shared caches for promoting scalability.</p>
+
+<h2><strong>Code on demand</strong></h2>
+
+<p>This is an optional constraint and is used the least. It permits a clients code or applets to be downloaded and to be used within the application. In essence, it simplifies the clients by creating a smart application which doesn&rsquo;t rely on its own code structure.</p>
+
+<p>Now, that you know the principles behind REST API, next let&rsquo;s look into the Methods of REST API.</p>
+
+<h1>Methods of REST API</h1>
+
+<p>All of us working with the technology of the web, do CRUD operations. When I say CRUD operations, I mean that we create a resource, read a resource, update a resource and delete a resource. Now, to do these actions, you can actually use the HTTP methods, which are nothing but the REST API Methods. Refer below.</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/5750/1*VTbKBIISbB9PhUK15H9xkA.png" style="height:200px; width:500px" /></p>
+
+<p>&nbsp;</p>
+
+<p>Now that you know what is a REST API and what all you need to mind in order to deliver an efficient application, let&rsquo;s dive deeper and see the process of building REST API.</p>
+
+<h1>How to create a REST API?</h1>
+
+<p>In this practical demonstration, I will be creating a simple CRUD REST application using Node.js. To build this application, you will need to install the following:</p>
+
+<ol>
+	<li>Node.js</li>
+	<li>Express.js</li>
+	<li>Joi</li>
+	<li>nodemon (Node Monitor)</li>
+</ol>
+
+<p>For this hands-on, I will be using the WebStorm IDE to write and execute the codes. You can use any IDE or code editor according to your choice. So, let&rsquo;s get started.</p>
+
+<p><strong>Step 1:</strong>&nbsp;Create a project directory, which will consist of all the files present in the project. Then, open commands prompt and navigate to the project directory. Refer below.</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/664/1*Vrv0Q-suN9lE6_hGWKJmww.png" style="height:138px; width:590px" /></p>
+
+<p>&nbsp;</p>
+
+<p><strong>Step 2:</strong>&nbsp;Now, call npm using the below command. This will initialize the npm modules in your system.</p>
+
+<pre>
+<span style="background-color:#bdc3c7">npm init</span></pre>
+
+<p>Once you hit enter, Node.js, will ask you to enter a few details related to the project. These details will basically be the metadata for your project. Refer below.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1569/1*xwaE9Y2714uz1qrJX3JINg.png" style="height:803px; width:1395px" /></p>
+
+<p>&nbsp;</p>
+
+<p>Here you can define your entry point along with several other information. For this demo, I will be using&nbsp;<strong>script.js</strong>&nbsp;as an entry point.</p>
+
+<p>It will then, ask you for a confirmation for the data you must have mentioned. Just press on<strong>&nbsp;Y</strong>&nbsp;to confirm. Refer below.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/2159/1*G5kEkzfNpZ2v98FZbGL19A.png" style="height:800px; width:1919px" /></p>
+
+<p><strong>Step 3:&nbsp;</strong>Next, you have yo install&nbsp;<strong>Step 3: Express.js</strong>&nbsp;using the below command:</p>
+
+<pre>
+<span style="background-color:#bdc3c7">npm i express</span></pre>
+
+<p>Express is a web framework which can be used along with Node.js. This web framework will allow you to create Restful APIs, with the help of helper methods, middle layers to configure your application.</p>
+
+<p><strong>Step 3.1:</strong>&nbsp;Similarly, you have to install&nbsp;<strong>Joi</strong>.</p>
+
+<pre>
+<span style="background-color:#bdc3c7">npm i joi</span></pre>
+
+<p>This package allows you to create blueprints for JavaScript objects which store information to ensure validation of key information.</p>
+
+<p><strong>Step 3.2:</strong>&nbsp;Finally, install the node monitoring package&nbsp;<strong>nodemon</strong>, using the below command.</p>
+
+<pre>
+<span style="background-color:#bdc3c7">npm i -g nodemon</span></pre>
+
+<p>Nodemon, keeps a watch on all the files with any type of extension present in this folder. Also, with nodemon on the watch, you don&rsquo;t have to restart the Node.js server each time any changes are made. Nodemon will implicitly detect the changes and restart the server for you.</p>
+
+<h2><strong>package.json</strong></h2>
+
+<pre>
+<span style="background-color:#ecf0f1">{
+&quot;name&quot;: &quot;restapidemo&quot;,
+&quot;version&quot;: &quot;1.0.0&quot;,
+&quot;description&quot;: &quot;Creation of REST API&quot;,
+&quot;main&quot;: &quot;script.js&quot;,
+&quot;scripts&quot;: {
+&quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;amp;&amp;amp; exit 1&quot;
+},
+&quot;author&quot;: &quot;sahiti_kappagantula&quot;,
+&quot;license&quot;: &quot;ISC&quot;,
+&quot;dependencies&quot;: {
+&quot;express&quot;: &quot;^4.17.1&quot;,
+&quot;joi&quot;: &quot;^14.3.1&quot;
+}
+}</span></pre>
+
+<h2><strong>script.js</strong></h2>
+
+<pre>
+<span style="background-color:#ecf0f1">const express = require(&#39;express&#39;); //Import Express
+const Joi = require(&#39;joi&#39;); //Import Joi
+const app = express(); //Create Express Application on the app variable
+app.use(express.json()); //used the json file
+ 
+//Give data to the server
+const customers = [
+{title: &#39;George&#39;, id: 1},
+{title: &#39;Josh&#39;, id: 2},
+{title: &#39;Tyler&#39;, id: 3},
+{title: &#39;Alice&#39;, id: 4},
+{title: &#39;Candice&#39;, id: 5}
+]</span>
+<span style="background-color:#ecf0f1"> 
+//Read Request Handlers
+// Display the Message when the URL consist of &#39;/&#39;
+app.get(&#39;/&#39;, (req, res) =&gt; {
+res.send(&#39;Welcome to Edurekas REST API!&#39;);
+});
+// Display the List Of Customers when URL consists of api customers
+app.get(&#39;/api/customers&#39;, (req,res)=&gt; {
+res.send(customers);
+});
+// Display the Information Of Specific Customer when you mention the id.
+app.get(&#39;/api/customers/:id&#39;, (req, res) =&gt; {
+const customer = customers.find(c =&gt; c.id === parseInt(req.params.id));
+//If there is no valid customer ID, then display an error with the following message
+if (!customer) res.status(404).send(&#39;&lt;h2 style=&quot;font-family: Malgun Gothic; color: darkred;&quot;&gt;Ooops... Cant find what you are looking for!&lt;/h2&gt;&#39;);
+res.send(customer);
+});
+ 
+//CREATE Request Handler
+//CREATE New Customer Information
+app.post(&#39;/api/customers&#39;, (req, res)=&gt; {
+ 
+const { error } = validateCustomer(req.body);
+if (error){
+res.status(400).send(error.details[0].message)
+return;
+}
+//Increment the customer id
+const customer = {
+id: customers.length + 1,
+title: req.body.title
+};
+customers.push(customer);
+res.send(customer);
+});
+ 
+//Update Request Handler
+// Update Existing Customer Information
+app.put(&#39;/api/customers/:id&#39;, (req, res) =&gt; {
+const customer = customers.find(c=&gt; c.id === parseInt(req.params.id));
+if (!customer) res.status(404).send(&#39;&lt;h2 style=&quot;font-family: Malgun Gothic; color: darkred;&quot;&gt;Not Found!! &lt;/h2&gt;&#39;);
+ 
+const { error } = validateCustomer(req.body);
+if (error){
+res.status(400).send(error.details[0].message);
+return;
+}
+ 
+customer.title = req.body.title;
+res.send(customer);
+});
+ 
+//Delete Request Handler
+// Delete Customer Details
+app.delete(&#39;/api/customers/:id&#39;, (req, res) =&gt; {
+ 
+const customer = customers.find( c=&gt; c.id === parseInt(req.params.id));
+if(!customer) res.status(404).send(&#39;&lt;h2 style=&quot;font-family: Malgun Gothic; color: darkred;&quot;&gt; Not Found!! &lt;/h2&gt;&#39;);
+ 
+const index = customers.indexOf(customer);
+customers.splice(index,1);
+ 
+res.send(customer);
+});
+//Validate Information
+function validateCustomer(customer) {
+const schema = {
+title: Joi.string().min(3).required()
+};
+return Joi.validate(customer, schema);
+ 
+}
+ 
+//PORT ENVIRONMENT VARIABLE
+const port = process.env.PORT || 8080;
+app.listen(port, () =&gt; console.log(`Listening on port ${port}..`));</span></pre>
+
+<p><strong>Step 4:</strong>&nbsp;Now, the next step is to check whether the handlers are working properly or not. For that, we will use a Chrome extension called Postman. To install Postman you can visit&nbsp;<a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en" rel="noopener nofollow">here</a>&nbsp;and click on&nbsp;<strong>Add to Chrome</strong>&nbsp;.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1140/1*ooCZdDdXaHDZmVllgUeA3w.png" style="height:267px; width:1013px" /></p>
+
+<p><strong>Step 5:</strong>&nbsp;Now, once you have installed Postman, open it to test your application.</p>
+
+<p><strong>Step 6:</strong>&nbsp;But before that you have to start your server. To start your server, type the following command.</p>
+
+<pre>
+<span style="background-color:#bdc3c7">node script.js</span></pre>
+
+<p>&nbsp;</p>
+
+<p>You would see the output as below:</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1161/1*-gL8VK60CKJ1yrcgJ0Msfw.png" style="height:78px; width:1032px" /></p>
+
+<h1>Results</h1>
+
+<p>Let us start by testing the GET Method.</p>
+
+<p><strong>Step 7:</strong>&nbsp;In order to do that you need to&nbsp;<strong>select GET</strong>&nbsp;from the drop-down list,&nbsp;<strong>type in the defined URL</strong>&nbsp;and hit&nbsp;<strong>send</strong>.</p>
+
+<p>If your code is working fine, then you will see the list of all the customers which we have added manually in our code. In the below picture, you can see how my result looks like. Here I have mentioned the URL to be&nbsp;<em>localhost:8080/api/customers</em></p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1905/1*SaJuqG0X9xDl8HwDWlC4Sw.png" style="height:702px; width:1693px" /></p>
+
+<p><strong>Step 8:</strong>&nbsp;Now, let&rsquo;s try adding a new customer to our stack of customers. For that, select &lsquo;&nbsp;<strong>POST</strong>&rsquo; from the drop-down list and type in the defined URL for the POST method. Then, click on &lsquo;&nbsp;<strong>Body</strong>&rsquo;, select &lsquo;&nbsp;<strong>raw</strong>&rsquo; and move on to select &lsquo;&nbsp;<strong>JSON</strong>&rsquo; from the drop-down list as depicted in the below image. Now,<strong>&nbsp;in the text area,</strong>&nbsp;type in the name of your customer as shown and hit&nbsp;<strong>send.</strong></p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1900/1*gjIKrb6ZU0JiC8NIIoEAew.png" style="height:683px; width:1689px" /></p>
+
+<p>If your POST method is working fine, your response body will contain the new customer&rsquo;s name along with the Customer ID. Here if you observe, we have only mentioned the name but we did not give the customer ID. This implies that the Customer ID is automatically incremented.</p>
+
+<p><strong>Step 9:</strong>&nbsp;Now, let&rsquo;s try to update a Customer name. Let us say we ant to update the name of the Customer ID = 3. So, to update the data, you need to first select &lsquo;<strong>PUT</strong>&rsquo; from the drop-down table and enter the PUT request&rsquo;s URL along with the customer id you wish to update. Next in the &lsquo;&nbsp;<strong>Body</strong>&nbsp;&lsquo;, type in the new customer name and hit enter.</p>
+
+<p>This will give you a response with the&nbsp;<em>customer id and updated customer name</em>.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1968/1*ot3EDSaj4ooBibsee4tB7A.png" style="height:808px; width:1749px" /></p>
+
+<p><strong>Step 10:</strong>&nbsp;Finally, let&rsquo;s send a &lsquo;&nbsp;<strong>DELETE</strong>&rsquo; request to delete an existing record. For that select&nbsp;<strong>DELETE</strong>&nbsp;from the drop-down list and type in the URL of the delete request handler along with the customer&rsquo;s details, you want to remove and hit enter. Let&rsquo;s say, I want to delete the details of a customer with id = 3. If your transaction is successful, you will see the complete details of the entry you have removed in the response body.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/1968/1*4sqvqxC--16OzBNwz5kRZw.png" style="height:799px; width:1749px" /></p>
+
+<p>Now, let&rsquo;s send a GET request for our final list of customers.</p>
+
+<p>&nbsp;</p>
+
+<p><img alt="Image for post" src="https://miro.medium.com/max/2045/1*nuo3zYvINoPRC1i4c24pGw.png" style="height:802px; width:1818px" /></p>
+
+<p>As you can see from the above screenshot, the response body contains a total of five customers with the customer id 3 missing as we have already deleted that entry.</p>

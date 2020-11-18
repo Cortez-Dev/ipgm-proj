@@ -135,7 +135,7 @@ router.post('/comment-add', ensureAuth, async function(req, res) {
     });
     comment.save();
     Article.find({_id: req.body.article_id},function(err,article){
-      sendEmailbyId(article[0].author_id,'Hi There');
+      sendEmailbyId(article[0].author_id,`${data[0].firstName} ${data[0].lastName} has commented on article ${article[0].title}`);
     });
     res.send({
       firstName: data[0].firstName,
