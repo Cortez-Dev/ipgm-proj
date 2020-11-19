@@ -416,7 +416,7 @@ router.get('/:id', ensureAuth, async function(req, res) {
                 return article;
             }
         })
-        if(!pushArt.exclude) {
+        if(!pushArt.exclude && pushArt.status == 'public') {
             articles.push(pushArt);
         }
     }
