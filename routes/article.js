@@ -334,7 +334,9 @@ router.post('/old/save', ensureAuth, async function(req, res) {
   console.log(req.body.status);
   Article.update({_id:article_id},{$set:{status:req.body.status}},function(err,num){
   });
-  Article.findById(article_id, function(err, article) {
+  Article.findByIdAndUpdate(article_id, {
+    exclude: false,
+  }, function(err, article) {
     if (err) {
       console.log(err);
     } else {

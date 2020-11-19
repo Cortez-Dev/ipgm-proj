@@ -36,7 +36,7 @@ router.post('/register', [
     check('firstName', 'Please enter your First Name').trim().not().isEmpty().escape(),
     check('lastName', 'Please enter your Last Name').trim().not().isEmpty().escape(),
     check('age', 'Please enter your Age').isNumeric(),
-], ensureGuest,function(req, res) {
+], ensureGuest, async function(req, res) {
     const errors = validationResult(req).errors;
     if(errors.length != 0) {
         res.render('pages/register', {
@@ -49,41 +49,62 @@ router.post('/register', [
         const lastName = req.body.lastName;
         const age = req.body.age;
 
-        let newUser = new User({
-            email: email,
-            password_hash: password
-        });
-
-        bcrypt.genSalt(10, function(err, salt){
-            bcrypt.hash(newUser.password_hash, salt, function(err, hash){
-                if(err){
-                    console.log(err);
+        const bool = await User.findOne({
+            email: email
+        }, function(err, data){
+            if (err) {
+                console.log(err)
+            } else {
+                if (data) {
+                    return true;
+                } else {
+                    return false;
                 }
-                newUser.password_hash = hash;
-                newUser.save(function(err, newUser){
+            }
+        })
+
+        if(bool) {
+            res.redirect('/users/register');
+        } else {
+            let newUser = new User({
+                email: email,
+                password_hash: password
+            });
+    
+            bcrypt.genSalt(10, function(err, salt){
+                bcrypt.hash(newUser.password_hash, salt, function(err, hash){
                     if(err){
                         console.log(err);
-                        return;
-                    } else {
-                        const user_id = newUser._id;
-                        const newProfile = new Profile ({
-                            user_id: user_id,
-                            firstName: firstName,
-                            lastName: lastName,
-                            age: age,
-                        });
-                        newProfile.save(function(err) {
-                            if(err) {console.log(err)}
-                        });
-                        req.flash('success','You are now registered and can log in');
-                        res.redirect('/users/login');
                     }
+                    newUser.password_hash = hash;
+                    newUser.save(function(err, newUser){
+                        if(err){
+                            console.log(err);
+                            return;
+                        } else {
+                            const user_id = newUser._id;
+                            const newProfile = new Profile ({
+                                user_id: user_id,
+                                firstName: firstName,
+                                lastName: lastName,
+                                age: age,
+                            });
+                            newProfile.save(function(err) {
+                                if(err) {console.log(err)}
+                            });
+                            req.flash('success','You are now registered and can log in');
+                            res.redirect('/users/login');
+                        }
+                    });
                 });
             });
-        });
-
+        }
     }
 });
+
+router.get('/terms', ensureAuth, function(req, res){
+    res.render('pages/terms')
+})
 
 router.post('/login', ensureGuest, function(req, res, next){
     passport.authenticate('local', {

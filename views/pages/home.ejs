@@ -21,6 +21,16 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/home">Home</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/article/new">New Article</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/dashboard">Dashboard</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="notifsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Notifications
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="notifsDropdown">
+                              <% user.notifications.forEach(element => { %>
+                                <a class="dropdown-item" href="#"><%= element %></a>
+                              <% }) %>
+                            </div>
+                        </li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/users/logout">Logout</a></li>
                     </ul>
                 </div>
