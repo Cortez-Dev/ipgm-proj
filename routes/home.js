@@ -16,7 +16,7 @@ router.get('/', ensureAuth, async function (req, res) {
             return articles
         }
     }).sort({createdAt: 'descending'}).exec();
-    res.render('pages/home', {
+    res.render('pages/home-new', {
         articles: articles
     });
 });
