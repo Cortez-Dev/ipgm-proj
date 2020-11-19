@@ -1,0 +1,14 @@
+<script>
+    $(function(){
+        $(".notifs").click(function(){
+            $.post("/users/notifs",{
+                data: $(this).html()
+            }, function(data) {
+                console.log(data.notifs);
+                let container = $('#notifs-container');
+                container.html('');
+                
+            })
+        })
+    });
+</script>

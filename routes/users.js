@@ -38,6 +38,7 @@ router.post('/register', [
     check('age', 'Please enter your Age').isNumeric(),
 ], ensureGuest, async function(req, res) {
     const errors = validationResult(req).errors;
+    console.log(errors)
     if(errors.length != 0) {
         res.render('pages/register', {
             errors:errors
@@ -64,7 +65,9 @@ router.post('/register', [
         })
 
         if(bool) {
-            res.redirect('/users/register');
+            const errors = []
+            errors.push({msg: 'Email already exists you can log in...'})
+            res.render('pages/login', {errors: errors});
         } else {
             let newUser = new User({
                 email: email,
@@ -104,7 +107,29 @@ router.post('/register', [
 
 router.get('/terms', ensureAuth, function(req, res){
     res.render('pages/terms')
-})
+});
+
+router.post('/notifs', ensureAuth, async function(req, res){
+    const user_id = req.user._id;
+    const data = req.body.data;
+    await User.findByIdAndUpdate(user_id, {
+        $pull: {notifications: data}
+    }, function(err, data) {
+        if(err) {
+            console.log(err)
+        } else {
+            console.log('Notification removed')
+        }
+    });
+    const notifs = await User.findById(user_id, function(err, data) {
+        if(err) {
+            console.log(err)
+        } else {
+            return data;
+        }
+    });
+    res.send({notifs: notifs});
+});
 
 router.post('/login', ensureGuest, function(req, res, next){
     passport.authenticate('local', {

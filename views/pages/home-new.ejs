@@ -40,9 +40,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="notifsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Notifications
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="notifsDropdown">
+                            <div class="dropdown-menu" id="notifs-container" aria-labelledby="notifsDropdown">
                               <% user.notifications.forEach(element => { %>
-                                <a class="dropdown-item" href="#"><%= element %></a>
+                                <div class="dropdown-item notifs pointer"><%= element %></div>
                               <% }) %>
                             </div>
                         </li>
@@ -126,6 +126,23 @@
                                         </div>\
                                     </div>\
                                 </div>\
+                            `);
+                        });
+                    })
+                })
+            });
+        </script>
+        <script>
+            $(function(){
+                $(".notifs").click(function(){
+                    $.post("/users/notifs",{
+                        data: $(this).html()
+                    }, function(data) {
+                        console.log(data.notifs);
+                        let container = $('#notifs-container');
+                        container.html('');
+                        data.notifs.notifications.forEach(function(element) {
+                            container.append(`<div class="dropdown-item notifs pointer">${element}</div>\
                             `);
                         });
                     })
