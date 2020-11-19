@@ -8,7 +8,6 @@ const { appendFileSync } = require('fs-extra');
 const Profile = require('../models/Profile');
 const Comment = require('../models/Comment');
 const Like = require('../models/Like');
-const Reported = require('../models/Reported');
 const Follow = require('../models/Follow');
 const User = require('../models/User');
 

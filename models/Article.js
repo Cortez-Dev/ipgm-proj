@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Comment = require('./Comment');
 
 const Article = new Schema({
 	author_id: {type: Schema.Types.ObjectId, ref:'User'},
@@ -15,10 +14,5 @@ const Article = new Schema({
     status: {type: String, enum: ['public', 'private'], default: 'public'},
     exclude: {type: Boolean, default: false},
 }, {timestamps: true});
-
-Article.pre('remove', function(next) {
-    Comment.remove({article_id: this._id}).exec();
-    next();
-});
 
 module.exports = mongoose.model('Article', Article);
