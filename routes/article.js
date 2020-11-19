@@ -206,25 +206,31 @@ router.post('/follow', ensureAuth, async function(req, res) {
   const article_id = req.body.article_id;
   console.log(req.body.article_id);
   Article.findById(article_id, function(err, article) {
+    const author_id = article.author_id;
+    const user_id = req.user._id;
     console.log({
-      author_id: article.author_id,
-      user_id: req.user._id
+      author_id: typeof(article.author_id),
+      user_id: typeof(req.user._id)
     });
-    Follow.findOne({
-      author_id: article.author_id,
-      user_id: req.user._id
-    }, function(err, data) {
-      if (data === null) {
-        var follow = new Follow({
-          author_id: article.author_id,
-          user_id: req.user._id
-        });
-        follow.save();
-        res.send("Followed");
-      } else {
-        res.send("Already Following");
-      }
-    });
+    if (author_id.toString()===user_id.toString()) {
+      res.send('You cannot follow yourself!')
+    } else {
+      Follow.findOne({
+        author_id: article.author_id,
+        user_id: req.user._id
+      }, function(err, data) {
+        if (data === null) {
+          var follow = new Follow({
+            author_id: article.author_id,
+            user_id: req.user._id
+          });
+          follow.save();
+          res.send("You are now following the author!");
+        } else {
+          res.send("You already follow the Author!");
+        }
+      });
+    }
   });
 });
 
@@ -276,6 +282,8 @@ router.get('/:id', ensureAuth, function(req, res) {
               firstName: profile.firstName,
               lastName: profile.lastName,
               article_id: article_id,
+              user_id: req.user._id.toString(),
+              author_id: article.author_id.toString(),
               comments: comments
             };
             res.render('pages/article_view', temp);

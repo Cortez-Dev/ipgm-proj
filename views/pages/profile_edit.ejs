@@ -52,21 +52,27 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 px-2 pb-4 m-0">
-                        <div class="card flex-row flex-wrap">
+                        <form class="card flex-row flex-wrap"  action="/users/save" method="POST">
                             <div class="card-header border-0">
                                 <img src="<%= profile.img %>" style="width: 100px; height: 100px;" alt="">
                             </div>
                             <div class="card-block p-4">
-                                <h5 class="card-title"><%= profile.firstName %> <%= profile.lastName %></h5>
-                                <p class="card-text"><%= profile.desc %></p>
-                                <p class="card-text"><%= profile_user.email %></p>
-                                <p class="card-text"><%= profile_user.role %></p>
+                                <div class="card-title form-group">
+                                    <input class="form-control" type="text" name="firstName" value="<%= profile.firstName %>" required>
+                                    <input class="form-control" type="text" name="lastName" value="<%= profile.lastName %>" required>
+                                </div>
+                                <div class="card-text form-group">
+                                    <input class="form-control" type="text" name="desc" value="<%= profile.desc %>" required>
+                                </div>
+                                <p class="card-text">Contact: <%= profile_user.email %></p>
+                                <p class="card-text">Role: <%= profile_user.role %></p>
                             </div>
                             <div class="w-100"></div>
                             <div class="card-footer w-100 text-muted">
-                                <button class="btn btn-primary" onclick="follow('<%= profile_user._id %>')">Follow</button>
+                                <!-- <input type="submit" class="form-control btn btn-primary" value="Update"> -->
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

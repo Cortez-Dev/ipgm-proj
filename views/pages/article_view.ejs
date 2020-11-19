@@ -32,9 +32,11 @@
   </nav>
   <!-- Main -->
   <div class="author-info" data-article_id=<%= article_id %>>
-    <h4 style="padding : 10px;color: white;"><strong><%= firstName %> <%= lastName %></strong></h4>
+    <h4 style="padding : 10px;color: white;"><a href="/users/<%= author_id %> "><strong><%= firstName %> <%= lastName %></strong></a></h4>
     <hr style="width: 100px;margin-top: 0px;margin-bottom: 5px;background-image: linear-gradient(to right, #52057b, #ea2c62); height:1px;">
+    <% if (user._id != author_id) { %>
     <button id="follow" onClick="follow();">Follow</button>
+    <% } %>
   </div>
 
   <div id="like-comment">

@@ -171,6 +171,27 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
     });
 });
 
+router.post('/save', ensureAuth, function(req, res, next){
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const desc = req.body.desc;
+    const user_id = req.user._id;
+    Profile.findOneAndUpdate({
+        user_id: user_id
+    }, {
+        firstName: firstName,
+        lastName: lastName,
+        desc: desc,
+    }, function(err, data) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log('Profile Updated')
+        }
+    });
+    res.redirect('/users/dashboard');
+});
+
 router.get('/articles', ensureAuth, async (req, res) => {
     const user = req.user._id;
     const profile = await Profile.findOne({user_id: user}, function(err, profile) {
@@ -349,9 +370,7 @@ router.get('/:id', ensureAuth, async function(req, res) {
                 return article;
             }
         })
-        if(pushArt.exclude) {
-            excludedArticles.push(pushArt);
-        } else {
+        if(!pushArt.exclude) {
             articles.push(pushArt);
         }
     }
@@ -365,22 +384,25 @@ router.get('/:id', ensureAuth, async function(req, res) {
 router.post('/:id/follow', ensureAuth, async function(req, res) {
     const user_id = req.user._id;
     const profile_id = req.params.id;
-    console.log(user_id)
-    console.log(profile_id)
-    let follow = await Follow.findOne({
+    if(user_id === profile_id) {
+        res.send('You cannot follow yourself!')
+    } else {
+        let follow = await Follow.findOne({
         author_id: profile_id,
         user_id: user_id
-    });
-    if(follow) {
-        res.send('You already follow the Author!')
-    } else {
-        follow = new Follow({
-            author_id: profile_id,
-            user_id: user_id
         });
-        follow.save();
-        res.send('You are now following the author!')
+        if(follow) {
+            res.send('You already follow the Author!')
+        } else {
+            follow = new Follow({
+                author_id: profile_id,
+                user_id: user_id
+            });
+            follow.save();
+            res.send('You are now following the author!')
+        }
     }
+    
 });
 
 module.exports = router

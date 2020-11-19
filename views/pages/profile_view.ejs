@@ -50,7 +50,9 @@
                             </div>
                             <div class="w-100"></div>
                             <div class="card-footer w-100 text-muted">
-                                <button class="btn btn-primary" onclick="follow('<%= profile_user._id %>')">Follow</button>
+                                <% if (user._id.toString()!=profile.user_id.toString()) { %>
+                                    <button class="btn btn-primary" onclick="follow('<%= profile_user._id %>')">Follow</button>
+                                <% } %>
                             </div>
                         </div>
                     </div>
